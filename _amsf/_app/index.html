@@ -1,0 +1,24 @@
+---
+layout: default
+title: Almace Scaffolding
+permalink: /
+---
+
+<!-- Article wrapper, limit width -->
+<article>
+
+  <!-- Post title -->
+  <header>
+    <h2>
+      I&rsquo;m Almace Scaffolding.
+    </h2>
+
+    <small>a.k.a. amsf, version 0.0.12</small>
+  </header>
+
+  <ul class="list has-content">
+    {% for post in site.categories.note %}
+      {% include page-item.html %}
+    {% endfor %}
+  </ul>
+</article>

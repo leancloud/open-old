@@ -1,0 +1,83 @@
+---
+layout: default
+---
+
+{% if page.css %}
+  <style>
+    {{ page.css }}
+  </style>
+{% endif %}
+
+<!-- Article wrapper, limit width -->
+<article>
+
+  <!-- Post title -->
+  <header>
+    <!-- Prepare for image headers -->
+    {% capture image_header %}
+      <img
+        src="{{ site.file }}/{{ page.img-headline }}"
+        alt="{{ page.title | strip_html | xml_escape }}"
+        {% if page.img-headline-width %}
+          style="width: {{ page.img-headline-width | times: 0.1 }}vw;"
+        {% else %}
+          style="width: 50vw;"
+        {% endif %}
+      >
+    {% endcapture %}
+
+    <!-- Prepare for SVG headers -->
+    {% capture svg_header_style %}
+      <style scoped>
+        h2 svg {
+          width: {{ page.svg-headline-width | times: 0.1 }}vw;
+          height: {{ page.svg-headline-height | times: 0.1 }}vw;
+        }
+      </style>
+    {% endcapture %}
+
+    {% capture svg_header %}
+      {% for i in page.svg-headline %}
+        {% include {{ i }} %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% if page.img-headline %}
+      <h2>
+        {% if page.link %}
+          <a href="{{ page.link }}">
+            {{ image_header }}
+          </a>
+        {% else %}
+          {{ image_header }}
+        {% endif %}
+      </h2>
+    {% elsif page.svg-headline %}
+      {{ svg_header_style }}
+      <h2>
+        {% if page.link %}
+          <a href="{{ page.link }}">
+            {{ svg_header }}
+          </a>
+        {% else %}
+          {{ svg_header }}
+        {% endif %}
+      </h2>
+    {% else %}
+      <h2>
+        {% if page.link %}
+          <a href="{{ page.link }}" class=external>{{ page.title }} <span></span></a>
+        {% else %}
+          {{ page.title }}
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if page.date %}<small>By <span rel=author>{{ site.profile.user }}</span> on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %d, %Y" }}</time></small>{% endif %}
+    {% if page.desc %}<small>{{ page.desc }}</small>{% endif %}
+  </header>
+
+  <!-- Post content -->
+  {{ content }}
+
+</article>

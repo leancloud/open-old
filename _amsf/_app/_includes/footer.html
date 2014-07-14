@@ -1,0 +1,18 @@
+<!-- Footer section -->
+{% if page.title == site.name and site.amsf == false %}
+{% else %}
+  <footer class=footer>
+    <ul>
+      <li><a href="{{ site.base }}/">{{ site.name }}</a></li>
+      {% if site.amsf %}
+        <li><a href="https://github.com/sparanoid/almace-scaffolding/" title="Almace Scaffolding">amsf</a></li>
+      {% endif %}
+      <li><a href="{{ site.feed | prepend: site.base }}/" title="Feed - Atom (The Atom Syndication Format)">Atom</a></li>
+    </ul>
+    {% if site.profile.google_plus %}
+      <p style="display: none;">
+        <a href="https://plus.google.com/+{{ site.profile.google_plus }}?rel=author" rel=author>Google+</a>
+      </p>
+    {% endif %}
+  </footer>
+{% endif %}
