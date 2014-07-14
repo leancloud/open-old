@@ -44,10 +44,10 @@ redcarpet:
 #
 
 # Site name
-name:           Almace Scaffolding
+name:           AVOS Cloud 开放资源
 
 # Site description, will appear in the document meta and Atom feed subtitle
-description:    I make things that don’t suck.
+description:    这里是 AVOS Cloud 开放的一些与产品本身无关的资源
 
 # Base URL, this is used when build with `archive` Grunt task, it will archive old version with specific URL prefix, all old versions goes to http://sparanoid.com/lab/version/. Usage example: /lab/version/21, without trailing slash
 # Default:      null
@@ -62,7 +62,7 @@ assets:         /assets
 feed:           /feed
 
 # Used in atom feed, sitemap, Twitter Cards, and etc. I should use absolute full URLs for these fields
-url:            http://sparanoid.com
+url:            http://open.avoscloud.com
 
 # Media assets URL used in posts, without trailing slash. ie. `<img href="{{ site.file }}/image.png">`. In the most cases this URL should be powered by a CDN provider
 file:           http://rsrc.sparanoid.com
@@ -78,12 +78,12 @@ download:       http://dl.sparanoid.com
 # {{ site.profile.google_plus }}: used in footer, this link is display: noned, only to pass Google+ authorship check
 # {{ site.profile.donate }}: a donate link used in posts like `<a href="{{ site.profile.donate }}">Donate me</a>`
 profile:
-  user:         Tunghsiao Liu
-  email:        t@sparanoid.com
+  user:         AVOS Cloud Team
+  email:        support@avoscloud.com
   twitter:
-    creator:    tunghsiao
-    site:       sparanoid
-  google_plus:  tunghsiaoliu
+    creator:    avoscloud
+    site:       avoscloud
+  google_plus:  avoscloud
   donate:       https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=LTXZ835Y6T95S
 
 # Enable this settings to make your feed Daring Fireball-like link blog
@@ -97,7 +97,7 @@ rss_excerpt:    false
 
 # Almace Scaffolding mode, enable post content for homepage and adding credit for site footer
 # Default:      false
-amsf:           true
+amsf:           false
 
 #
 # Custom distribution variables
