@@ -1,0 +1,55 @@
+{
+  "name": "almace-scaffolding",
+  "version": "0.0.12",
+  "description": "Almace Scaffolding, a sleek and super-fast responsive theme with only one HTTP request",
+  "author": "Tunghsiao Liu",
+  "homepage": "http://sparanoid.com/work/almace-scaffolding/",
+  "main": "Gruntfile.coffee",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sparanoid/almace-scaffolding.git"
+  },
+  "bugs": {
+    "url": "http://github.com/sparanoid/almace-scaffolding/issues"
+  },
+  "licenses": {
+    "type": "MIT",
+    "url": "http://github.com/sparanoid/almace-scaffolding/blob/master/LICENSE"
+  },
+  "keywords": [
+    "jekyll",
+    "blog",
+    "less",
+    "css"
+  ],
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^0.8.1",
+    "grunt-banner": "^0.2.3",
+    "grunt-cleanempty": "^0.2.1",
+    "grunt-coffeelint": "^0.0.10",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-csslint": "^0.2.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-less": "^0.11.3",
+    "grunt-contrib-uglify": "^0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-conventional-changelog": "^1.1.0",
+    "grunt-csscomb": "^2.0.1",
+    "grunt-html-smoosher": "^0.1.3",
+    "grunt-html-validation": "^0.1.18",
+    "grunt-rev": "^0.1.0",
+    "grunt-shell": "^0.7.0",
+    "grunt-text-replace": "^0.3.12",
+    "grunt-usemin": "^2.3.0",
+    "grunt-xmlmin": "^0.1.1",
+    "matchdep": "^0.3.0",
+    "time-grunt": "^0.4.0"
+  }
+}

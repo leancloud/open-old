@@ -1,0 +1,12 @@
+---
+layout: page
+title: Docs
+permalink: /doc/
+desc: 文档
+---
+
+<ul class=list>
+  {% for post in site.categories.doc %}
+    {% include page-item.html %}
+  {% endfor %}
+</ul>

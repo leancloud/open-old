@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<!-- Article wrapper, limit width -->
+<article>
+
+  <!-- Page title -->
+  <header>
+    <h2>{{ page.title }}</h2>
+    {% if page.desc %}<small>{{ page.desc }}</small>{% endif %}
+  </header>
+
+  <!-- Page content -->
+  {{ content }}
+</article>

@@ -1,0 +1,26 @@
+<!doctype html>
+
+<meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
+<meta name="description" content="{{ site.description }}">
+
+<title>{% if page.title != site.name %}{{ site.name }} - {% endif %}{{ page.title | strip_html | xml_escape }}</title>
+
+<link rel=alternate href="{{ site.feed | prepend: site.base }}/" type=application/atom+xml>
+<link rel=stylesheet href="{{ '/css/app.css' | prepend: site.assets }}">
+
+{% if page.title == site.name %}<link rel=dns-prefetch href="{{ site.file }}">{% endif %}
+
+<!-- Define a description for better SEO result, exclude homepage -->
+{% capture content_description %}
+  {{ page.content | strip_html | strip_newlines | xml_escape | truncatewords: 50 | replace: '  ', ' ' | replace: '  ', ' ' | replace: '  ', ' ' | append: '…' }}
+{% endcapture %}
+
+{% if page.permalink != '/' %}
+  {% if page.excerpt %}
+    <meta name=description content="{{ page.excerpt | strip_html | strip_newlines | xml_escape | truncatewords: 30 }}">
+  {% elsif page.desc %}
+    <meta name=description content="{{ page.desc | strip_html | strip_newlines | xml_escape }}">
+  {% else %}
+    <meta name=description content="{{ content_description }}">
+  {% endif %}
+{% endif %}

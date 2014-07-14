@@ -1,0 +1,24 @@
+---
+layout: default
+title: AVOS Cloud 开放资源
+permalink: /
+---
+
+<!-- Article wrapper, limit width -->
+<article>
+
+  <!-- Post title -->
+  <header>
+    <h2>
+      Open Resources
+    </h2>
+
+    <small>AVOS Cloud 开放的一些与产品本身无关的资源</small>
+  </header>
+
+  <ul class="list has-content">
+    {% for post in site.categories.doc %}
+      {% include page-item.html %}
+    {% endfor %}
+  </ul>
+</article>
