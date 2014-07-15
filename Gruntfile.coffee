@@ -208,10 +208,10 @@ module.exports = (grunt) ->
         stdout: true
 
       server:
-        command: "jekyll serve --watch --future --drafts --config _config.yml,_config.dev.yml"
+        command: "bundle exec jekyll serve --watch --future --drafts --config _config.yml,_config.dev.yml"
 
       dist:
-        command: "jekyll build"
+        command: "bundle exec jekyll build"
 
       sync:
         command: "rsync -avz --delete --progress <%= config.cfg.ignore_files %> <%= config.dist %>/ <%= config.cfg.remote_host %>:<%= config.cfg.remote_dir %> > rsync.log"
