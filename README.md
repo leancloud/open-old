@@ -1,4 +1,6 @@
 # [open.avoscloud.com](http://open.avoscloud.com/)
+[![Build Status](https://travis-ci.org/avoscloud/open.svg)](https://travis-ci.org/avoscloud/open)
+[![devDependency Status](https://david-dm.org/avoscloud/open/dev-status.svg)](https://david-dm.org/avoscloud/open#info=devDependencies)
 
 这里是 AVOS Cloud 开放的一些与产品本身无关的资源
 
