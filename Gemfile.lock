@@ -32,6 +32,8 @@ GEM
     jekyll-coffeescript (1.0.0)
       coffee-script (~> 2.2)
     jekyll-gist (1.1.0)
+    jekyll-last-modified-at (0.2.2)
+      jekyll
     jekyll-paginate (1.0.0)
     jekyll-sass-converter (1.0.0)
       sass (~> 3.2)
@@ -66,3 +68,4 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (>= 2.1.1)
+  jekyll-last-modified-at (>= 0.2.2)

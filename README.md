@@ -18,16 +18,15 @@ $ grunt serve
 
 ### 增加新条目
 
-1. 在 `./_app/_posts` 下的对应子目录增加新的 `.md` 文件，文件名应符合 `yyyy-mm-dd-title.md` 的格式。
+- 在 `./_app/_posts` 下的对应子目录增加新的 `.md` 文件，文件名应符合 `yyyy-mm-dd-title.md` 的格式。
 
 ### 更新现有条目
 
-1. 更新 `./_app/_posts` 下的对应 `.md` 文件。如果是重要更新应在文件末尾加注更新内容及日期。
-2. 重命名文件以反映最近更新的日期。
+- 更新 `./_app/_posts` 下的对应 `.md` 文件。如果是重要更新应在文件末尾加注更新内容及日期。
 
 ### 样式更新
 
-1. 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less)，文件变更后刷新浏览器即可实时查看变更
+- 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less)，文件变更后刷新浏览器即可实时查看变更
 
 ## Licenses
 

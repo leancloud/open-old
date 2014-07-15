@@ -99,6 +99,10 @@ rss_excerpt:    false
 # Default:      false
 amsf:           false
 
+# Plugin for open.avoscloud.com
+gems:
+  - jekyll-last-modified-at
+
 #
 # Custom distribution variables
 #
