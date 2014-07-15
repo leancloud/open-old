@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /lab/version/
-Sitemap: http://open.avoscloud.com/open/sitemap.xml
