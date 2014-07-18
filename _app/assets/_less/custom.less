@@ -47,32 +47,27 @@
 // @background-color: gold;
 // @text-color: #000;
 
-// AVOS Cloud
-@link-color: #3090e4;
-@background-color: #fff;
-@text-color: #000;
-
 // Alternative title color switch
 // Uncomment the following style will enalbe alternative post title color, this is useful when you're using the custom theme from above.
 .content { li h2 a, header h1, header h1 a { color: @link-color; } }
 .external span { background: @link-color; }
 
-// Custom post list
-ul.list.has-content {
-
-  > li {
-    margin-bottom: 14vmin;
-
-    h2 {
-      margin-bottom: 2vmin;
-    }
-  }
+// Alternative title size
+// By default all heading levels have the same font size, but many people may not like this, so here's an alternative font size stack:
+.content {
+  h3 { font-size: 110%; }
+  h4 { font-size: 100%; }
+  h5 { font-size: 90%; }
+  h6 { font-size: 80%; }
 }
 
+// Custom styles for open.avoscloud.com
+@link-color: #3090e4;
+@background-color: #fff;
+@text-color: #000;
 
 .footer {
   text-transform: none;
 }
 
-// Custom variables
 @base-font-size: 1.8vw;
