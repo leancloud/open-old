@@ -32,5 +32,5 @@ category: doc
 
 ### 推荐阅读
 
-* [余光中：怎样改进英式中文？─ 论中文的常态与变态]({% post_url /note/2014-07-17-improve-chinese %})
+* [余光中：怎样改进英式中文？——论中文的常态与变态]({% post_url /note/2014-07-17-improve-chinese %})
 * 「The Elements of Style」，虽然是讲英语，但很多对中文也适用。
