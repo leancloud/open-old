@@ -2,6 +2,7 @@
 layout: post
 title: 文案风格指南
 category: doc
+lang: zh
 ---
 
 ### 公司及产品名称

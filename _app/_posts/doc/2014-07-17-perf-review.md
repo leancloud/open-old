@@ -2,6 +2,7 @@
 layout: post
 title: 工作的评价和反馈机制
 category: doc
+lang: zh
 ---
 
 ### 评价和反馈
