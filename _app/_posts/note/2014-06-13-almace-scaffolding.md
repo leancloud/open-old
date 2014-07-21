@@ -2,6 +2,7 @@
 layout: post
 title: Welcome to Almace Scaffolding
 category: note
+hidden: true
 ---
 
 `amsf`, a.k.a. **Almace Scaffolding**, a sleek and super-fast responsive theme with only one HTTP request, LESS auto-compile, prefix-free, HTML minification, inlined stylesheets and more. Available for Jekyll right now (will be available for more platforms in the future).
