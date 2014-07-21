@@ -28,6 +28,16 @@ $ grunt serve
 
 - 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less)，文件变更后刷新浏览器即可实时查看变更
 
+### 如何从 Atom feed 中隐藏文章
+
+- 在该文章的 YAML front-matter 数据中添加如下字段：
+
+```
+hidden: true
+```
+
+例子请参考 [./_app/_posts/note/2014-07-17-improve-chinese.md](/_app/_posts/note/2014-07-17-improve-chinese.md)
+
 ## Licenses
 
 © AVOS Cloud
