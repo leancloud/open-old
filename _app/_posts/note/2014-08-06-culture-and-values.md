@@ -2,7 +2,7 @@
 layout: post
 title: 文化和价值
 lang: zh
-category: doc
+category: draft
 hidden: true
 ---
 
