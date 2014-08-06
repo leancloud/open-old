@@ -2,8 +2,7 @@
 layout: post
 title: 文化和价值
 lang: zh
-category: draft
-hidden: true
+category: doc
 ---
 
 ## 我们的事业
