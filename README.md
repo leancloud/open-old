@@ -1,4 +1,4 @@
-# [open.avoscloud.com](http://open.avoscloud.com/)
+# [open.leancloud.cn](http://open.leancloud.cn/)
 [![Build Status](https://travis-ci.org/avoscloud/open.svg)](https://travis-ci.org/avoscloud/open)
 [![devDependency Status](https://david-dm.org/avoscloud/open/dev-status.svg)](https://david-dm.org/avoscloud/open#info=devDependencies)
 
