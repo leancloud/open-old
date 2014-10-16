@@ -44,10 +44,10 @@ redcarpet:
 #
 
 # Site name
-name:           AVOS Cloud 开放资源
+name:           LeanCloud 开放资源
 
 # Site description, will appear in the document meta and Atom feed subtitle
-description:    这里是 AVOS Cloud 开放的一些与产品本身无关的资源
+description:    这里是 LeanCloud 开放的一些与产品本身无关的资源
 
 # Base URL, this is useful when I need to build site in a sub-directory (like GitHub Pages for Projects), it provides a specific URL prefix, for example, if the production site URL is http://sparanoid.com/lab/version/, set `base` to `/lab/version/24`, without trailing slash.
 # Default:      null
@@ -62,7 +62,7 @@ assets:         /assets
 feed:           /feed
 
 # Used in atom feed, sitemap, Twitter Cards, and etc. I should use absolute full URLs for these fields
-url:            http://open.avoscloud.com
+url:            http://open.leancloud.cn
 
 # Media assets URL used in posts, without trailing slash. ie. `<img href="{{ site.file }}/image.png">`. In the most cases this URL should be powered by a CDN provider
 file:           http://rsrc.sparanoid.com
@@ -78,12 +78,12 @@ download:       http://dl.sparanoid.com
 # {{ site.profile.google_plus }}: used in footer, this link is display: noned, only to pass Google+ authorship check
 # {{ site.profile.donate }}: a donate link used in posts like `<a href="{{ site.profile.donate }}">Donate me</a>`
 profile:
-  user:         AVOS Cloud Team
-  email:        support@avoscloud.com
+  user:         LeanCloud Team
+  email:        support@leancloud.cn
   twitter:
-    creator:    avoscloud
-    site:       avoscloud
-  google_plus:  avoscloud
+    creator:    leancloud
+    site:       leancloud
+  google_plus:  leancloud
   donate:       https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=LTXZ835Y6T95S
 
 # Enable this settings to make your feed Daring Fireball-like link blog
@@ -107,7 +107,7 @@ colorful_list:  false
 # Default:      true
 credits:        true
 
-# Plugin for open.avoscloud.com
+# Plugin for open.leancloud.cn
 gems:
   - jekyll-last-modified-at
 
