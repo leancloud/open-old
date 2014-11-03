@@ -12,7 +12,7 @@ $ bundle install && npm install
 $ grunt serve
 ```
 
-更多资讯请参考 [sparanoid/almace-scaffolding#setup](https://github.com/sparanoid/almace-scaffolding#setup)
+更多资讯请参考 [sparanoid/almace-scaffolding](https://github.com/sparanoid/almace-scaffolding)
 
 ## 维护指南
 
