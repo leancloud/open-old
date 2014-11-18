@@ -81,7 +81,7 @@ layout: default
       </h1>
     {% endif %}
 
-    {% if page.date %}<small>Last updated on <time datetime="{% last_modified_at %FT%X+08:00 %}">{% last_modified_at %b %d, %Y %}</time></small>{% endif %}
+    {% if page.date %}<small>Last updated on <time datetime="{{ page.last_modified_at | date: '%FT%X+08:00' }}">{{ page.last_modified_at | date: '%b %d, %Y' }}</time></small>{% endif %}
     {% if page.desc %}<small>{{ page.desc }}</small>{% endif %}
   </header>
 
