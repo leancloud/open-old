@@ -1,12 +1,10 @@
 ---
 layout: page
-title: Docs
-permalink: /doc/
-desc: 文档
+title: Notes
+permalink: /note/
+desc: Notes
 ---
 
-<ul class=list>
-  {% for post in site.categories.doc %}
+{% for post in site.categories.note %}
     {% include page-item.html %}
   {% endfor %}
-</ul>

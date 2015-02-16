@@ -2,6 +2,14 @@
   url:   /
   cate:  home
 
+- title: Docs
+  url:   /doc/
+  cate:  doc
+
+- title: Notes
+  url:   /note/
+  cate:  note
+
 - title: About
   url:   /about/
   cate:  about
