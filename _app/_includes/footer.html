@@ -7,12 +7,10 @@
       {% if site.credits %}
         <li><a href="http://sparanoid.com/lab/amsf/" title="Almace Scaffolding">amsf</a></li>
       {% endif %}
+      {% if site.subscription %}
+        <li><a href="{{ '/email-signup' | prepend: site.base }}/">Email</a></li>
+      {% endif %}
       <li><a href="{{ site.feed | prepend: site.base }}/" title="Feed - Atom (The Atom Syndication Format)">Atom</a></li>
     </ul>
-    {% if site.profile.google_plus %}
-      <p style="display: none;">
-        <a href="https://plus.google.com/+{{ site.profile.google_plus }}?rel=author" rel=author>Google+</a>
-      </p>
-    {% endif %}
   </footer>
 {% endif %}

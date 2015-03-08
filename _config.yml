@@ -13,6 +13,7 @@ timezone:       Asia/Hong_Kong
 permalink:      /:title.html
 markdown:       redcarpet
 highlighter:    pygments
+include:        ["_pages"]
 
 #
 # Jekyll serve settings
@@ -36,6 +37,7 @@ redcarpet:
     - no_intra_emphasis
     - smart
     - space_after_headers
+    - strikethrough
     - superscript
     - tables
 
@@ -70,21 +72,15 @@ file:           http://rsrc.sparanoid.com
 # Download files URL used in posts, ie. href="{{ site.download }}/package.zip", this should also be a CDN link just like `site.url`. There's no differences in `site.url` and `site.download`, I just use one CDN for post images and another for large download files. That's it. Remove or ignore this if you don't need it
 download:       http://dl.sparanoid.com
 
-# User related information
-# {{ site.profile.user }}: author name, used in post pages, and atom feed
-# {{ site.profile.email }}: used in atom feed, homepage, and about page
-# {{ site.profile.twitter.creator }}: used by Twitter Cards
-# {{ site.profile.twitter.site }}: used by Twitter Cards
-# {{ site.profile.google_plus }}: used in footer, this link is display: noned, only to pass Google+ authorship check
-# {{ site.profile.donate }}: a donate link used in posts like `<a href="{{ site.profile.donate }}">Donate me</a>`
-profile:
-  user:         LeanCloud Team
-  email:        support@leancloud.cn
-  twitter:
-    creator:    leancloud
-    site:       leancloud
-  google_plus:  leancloud
-  donate:       https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=LTXZ835Y6T95S
+# Site Twitter account handle
+twitter:        sparanoid
+
+# Site donate link, used in several posts
+donate:         https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=LTXZ835Y6T95S
+
+# Force UTF-8 encoding, enable this will simply add <meta charset=utf-8> to the head of your pages
+# Default:      false
+force_utf_8:    false
 
 # Enable this settings to make your feed Daring Fireball-like link blog
 # (This basically change your <link> value to external link you defined in your posts)
@@ -106,6 +102,10 @@ colorful_list:  false
 # Show generator credits
 # Default:      true
 credits:        true
+
+# Show email subscription link in footer
+# Default:      false
+subscription:   false
 
 # Plugin for open.leancloud.cn
 gems:
