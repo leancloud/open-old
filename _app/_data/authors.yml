@@ -7,7 +7,7 @@
 # {{ author.web }}: used in atom feed
 # {{ author.twitter }}: used by Twitter Cards
 default:
-  name:         support@leancloud.cn
+  name:         LeanCloud Team
   email:        support@leancloud.cn
   web:          http://leancloud.cn/
   twitter:      leancloudrocks
