@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 
 group :development do
   gem 'jekyll', '>= 3.0.0.beta2'
