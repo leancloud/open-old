@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     blankslate (2.1.2.4)
     celluloid (0.16.0)
