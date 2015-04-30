@@ -14,6 +14,7 @@ module.exports = (grunt) ->
       pkg: grunt.file.readJSON("package.json")
       app: "<%= config.cfg.source %>"
       dist: "<%= config.cfg.destination %>"
+      base: "<%= config.cfg.base %>"
       banner: do ->
         banner = "<!--\n"
         banner += " © <%= config.pkg.author %>.\n\n"
@@ -42,7 +43,7 @@ module.exports = (grunt) ->
           csslintrc: "<%= config.app %>/assets/_less/.csslintrc"
 
       test:
-        src: ["<%= less.serve.src %>"]
+        src: ["<%= config.app %>/assets/_less/**/app*.less"]
 
     validation:
       options:
@@ -67,7 +68,7 @@ module.exports = (grunt) ->
 
       js:
         files: ["<%= config.app %>/assets/_js/**/*.js"]
-        tasks: ["uglify:serve"]
+        tasks: ["copy:serve"]
         options:
           interrupt: true
 
@@ -85,14 +86,17 @@ module.exports = (grunt) ->
         tasks: ['jekyll:serve']
 
     uglify:
+      # Deprecated, pending delete
+      # Date: Apr 2, 2015, 10:56 AM
       serve:
         options:
           sourceMap: true
+          sourceMapIncludeSources: true
 
         files: [
           expand: true
           cwd: "<%= config.app %>/assets/_js/"
-          src: ["*.js", "!*.min.js"]
+          src: ["**/*.js", "!*.min.js"]
           dest: "<%= config.app %>/assets/js/"
         ]
 
@@ -103,7 +107,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "<%= config.app %>/assets/_js/"
-          src: ["*.js", "!*.min.js"]
+          src: ["**/*.js", "!*.min.js"]
           dest: "<%= config.app %>/assets/js/"
         ]
 
@@ -113,34 +117,39 @@ module.exports = (grunt) ->
           strictMath: true
           sourceMap: true
           outputSourceFiles: true
-          sourceMapURL: "app.css.map"
-          sourceMapFilename: "<%= config.app %>/assets/css/app.css.map"
 
-        src: ["<%= config.app %>/assets/_less/app.less"]
-        dest: "<%= config.app %>/assets/css/app.css"
+        files: [
+          expand: true
+          cwd: "<%= config.app %>/assets/_less/"
+          src: ["**/app*.less"]
+          dest: "<%= config.app %>/assets/css/"
+          ext: ".css"
+        ]
 
       dist:
-        src: ["<%= less.serve.src %>"]
-        dest: "<%= less.serve.dest %>"
+        files: "<%= less.serve.files %>"
 
     autoprefixer:
       serve:
-        src: ["<%= less.serve.dest %>"]
-        dest: "<%= less.serve.dest %>"
+        src: "<%= config.app %>/assets/css/**/*.css"
         options:
           map: true
 
       dist:
-        src: ["<%= less.serve.dest %>"]
-        dest: "<%= less.serve.dest %>"
+        src: "<%= autoprefixer.serve.src %>"
 
     csscomb:
       options:
         config: "<%= config.app %>/assets/_less/.csscomb.json"
 
       dist:
-        src: ["<%= less.serve.dest %>"]
-        dest: "<%= less.serve.dest %>"
+        files: [
+          expand: true
+          cwd: "<%= less.serve.files.0.dest %>"
+          src: ["*.css"]
+          dest: "<%= less.serve.files.0.dest %>"
+          ext: ".css"
+        ]
 
     htmlmin:
       dist:
@@ -186,7 +195,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "<%= config.dist %>/assets/css/"
-          src: ["*.css", "!*.min.css"]
+          src: ["**/*.css", "!*.min.css"]
           dest: "<%= config.dist %>/assets/css/"
         ]
 
@@ -231,16 +240,23 @@ module.exports = (grunt) ->
       dist:
         options:
           config: "_config.yml"
+          dest: "<%= config.dist %>/<%= config.base %>"
 
     shell:
       options:
         stdout: true
 
-      sync:
+      # Direct sync compiled static files to remote server
+      syncServer:
         command: "rsync -avz --delete --progress <%= config.cfg.ignore_files %> <%= config.dist %>/ <%= config.cfg.remote_host %>:<%= config.cfg.remote_dir %> > rsync.log"
 
+      # Copy compiled static files to local directory for further post-process
+      syncLocal:
+        command: "rsync -avz --delete --progress <%= config.cfg.ignore_files %> <%= jekyll.dist.options.dest %>/ /Users/sparanoid/Dropbox/Sites/sparanoid.com<%= config.base %> > rsync.log"
+
+      # Sync images to a separate CloudFront
       s3:
-        command: "s3cmd sync -rP --guess-mime-type --delete-removed --no-preserve --cf-invalidate --exclude '.DS_Store' <%= config.cfg.static_files %> <%= config.cfg.s3_bucket %>"
+        command: "s3cmd sync -rP --guess-mime-type --delete-removed --no-preserve --cf-invalidate --add-header=Cache-Control:max-age=31536000 --exclude '.DS_Store' <%= config.cfg.static_files %> <%= config.cfg.s3_bucket %>"
 
     concurrent:
       options:
@@ -253,10 +269,26 @@ module.exports = (grunt) ->
           "cssmin"
         ]
 
+    copy:
+      serve:
+        files: [
+          expand: true
+          dot: true
+          cwd: "<%= config.app %>/assets/_js/"
+          src: ["**/*.js"]
+          dest: "<%= config.app %>/assets/js/"
+        ]
+
     clean:
       dist:
         src: [
           ".tmp"
+        ]
+
+      jekyllMetadata:
+        src: [
+          "<%= config.dist %>"
+          "<%= config.app %>/.jekyll-metadata"
         ]
 
       postDist:
@@ -310,6 +342,23 @@ module.exports = (grunt) ->
         ]
         notify: true
 
+    release:
+      options:
+        changelog: false,
+        file: "package.json"
+        npm: false
+        commitMessage: "chore: release <%= version %>"
+        tagName: "v<%= version %>"
+        tagMessage: "chore: tagging version <%= version %>"
+        afterBump: [
+          "changelog"
+        ]
+        # Dev options
+        commit: false
+        tag: false
+        push: false
+        pushTags: false
+
   grunt.registerTask "reset", "Reset user availability", (target) ->
     grunt.config.set "replace.availability.replacements.0.to", "$1 true"
     grunt.task.run [
@@ -318,7 +367,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "serve", "Fire up a server on local machine for development", [
     "clean"
-    "uglify:serve"
+    "copy:serve"
     "less:serve"
     "autoprefixer:serve"
     "jekyll:serve"
@@ -334,25 +383,39 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", "Build site with `jekyll`, use `--busy` to set availability to false", (target) ->
     grunt.config.set "replace.availability.replacements.0.to", "$1 false" if grunt.option("busy")
-    grunt.task.run [
-      "replace"
-      "clean"
-      "coffeelint"
-      "uglify:dist"
-      "less:dist"
-      "autoprefixer:dist"
-      "csscomb"
-      "jekyll:dist"
-      "concurrent:dist"
-      "smoosher"
-      "usebanner"
-      "clean:postDist"
-      "reset"
-    ]
+    if grunt.option("fast")
+      grunt.task.run [
+        "replace"
+        "clean"
+        "coffeelint"
+        "uglify:dist"
+        "less:dist"
+        "autoprefixer:dist"
+        "csscomb"
+        "jekyll:dist"
+        "usebanner"
+        "reset"
+      ]
+    else
+      grunt.task.run [
+        "replace"
+        "clean"
+        "coffeelint"
+        "uglify:dist"
+        "less:dist"
+        "autoprefixer:dist"
+        "csscomb"
+        "jekyll:dist"
+        "concurrent:dist"
+        "smoosher"
+        "usebanner"
+        "clean:postDist"
+        "reset"
+      ]
 
   grunt.registerTask "sync", "Build site + rsync static files to remote server", [
     "build"
-    "shell:sync"
+    "shell:syncLocal"
   ]
 
   grunt.registerTask "s3", "Sync image assets with `s3cmd`", [

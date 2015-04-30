@@ -1,3 +1,76 @@
+<a name"0.0.24"></a>
+### 0.0.24 (2015-04-30)
+
+
+#### Bug Fixes
+
+* **grunt:** `copy:serve` not copying scripts in subdirectories ([ccba58e9](https://github.com/sparanoid/sparanoid.com/commit/ccba58e9))
+* **style:** better code appearance ([c6e0f5c2](https://github.com/sparanoid/sparanoid.com/commit/c6e0f5c2))
+* **travis:** build error ([b1a9a0af](https://github.com/sparanoid/sparanoid.com/commit/b1a9a0af))
+* **style:** remove unwanted margin for last-child ([68d288c0](https://github.com/sparanoid/sparanoid.com/commit/68d288c0))
+
+
+#### Features
+
+* **post:**
+  * new article “Amazon S3 × CloudFront” ([347624c9](https://github.com/sparanoid/sparanoid.com/commit/347624c9))
+  * new post “iTunes Artwork Grabber” ([6e562a32](https://github.com/sparanoid/sparanoid.com/commit/6e562a32))
+* **style:**
+  * disable WebKit hyphens, it sucks ([f119ccc1](https://github.com/sparanoid/sparanoid.com/commit/f119ccc1))
+  * refine font size ([7b345668](https://github.com/sparanoid/sparanoid.com/commit/7b345668))
+* **template:**
+  * update remote server deployment ([6b31c70b](https://github.com/sparanoid/sparanoid.com/commit/6b31c70b))
+  * add canonical link support ([84ab1e8d](https://github.com/sparanoid/sparanoid.com/commit/84ab1e8d))
+  * better template structures ([c3191b36](https://github.com/sparanoid/sparanoid.com/commit/c3191b36))
+  * `twitter-cards` is now `open-graph` ([e3edcff5](https://github.com/sparanoid/sparanoid.com/commit/e3edcff5))
+  * add custom head and foot hooks ([1ee7d566](https://github.com/sparanoid/sparanoid.com/commit/1ee7d566))
+* **work:** update categories ([445de41c](https://github.com/sparanoid/sparanoid.com/commit/445de41c))
+
+#### Breaking Changes
+
+* This release changes the way you push compiled files to remote servers. Now I changed my server from Linode VPS to Amazon S3 and CloudFront, I also changed my feed URL from /feed/ to /feed.xml since Amazon S3 doesn't support multiple Document Index. You can read more information from my [blog post](http://sparanoid.com/note/amazon-s3-cloudfront/).
+
+ ([6b31c70b](https://github.com/sparanoid/sparanoid.com/commit/6b31c70b))
+* Major template update, you should update all your template files if you need further updates.
+
+ ([c3191b36](https://github.com/sparanoid/sparanoid.com/commit/c3191b36))
+* Now you can insert custom code snippets into `<head>` and `<footer>` per post. Just simply use the following syntax in post front-matter:
+
+```
+head: |
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/pjdeblccplohlgedbefopohaedodcgci">
+```
+
+or:
+
+```
+foot: |
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
+```
+
+ ([1ee7d566](https://github.com/sparanoid/sparanoid.com/commit/1ee7d566))
+
+
+<a name"0.0.23"></a>
+### 0.0.23 (2015-04-20)
+
+
+#### Bug Fixes
+
+* **grunt:** not detecting newly added files ([f386d870](https://github.com/sparanoid/sparanoid.com/commit/f386d870))
+* **package:** missing `grunt-html-smoosher` ([c54b001a](https://github.com/sparanoid/sparanoid.com/commit/c54b001a))
+* **template:** better Twitter Cards author support ([56f089c3](https://github.com/sparanoid/sparanoid.com/commit/56f089c3))
+
+
+#### Features
+
+* **build:**
+  * try `grunt-release` task ([7ddb2f2d](https://github.com/sparanoid/sparanoid.com/commit/7ddb2f2d))
+  * update Travis ([95910f0e](https://github.com/sparanoid/sparanoid.com/commit/95910f0e))
+* **grunt:** speed up serve task by passing JS files directly from `copy` ([0165c8db](https://github.com/sparanoid/sparanoid.com/commit/0165c8db))
+* **style:** custom inlined-style list ([aae14607](https://github.com/sparanoid/sparanoid.com/commit/aae14607))
+
+
 <a name="0.0.22"></a>
 ### 0.0.22 (2015-03-06)
 
