@@ -49,7 +49,7 @@ redcarpet:
 name:           LeanCloud 开放资源
 
 # Site description, will appear in the document meta and Atom feed subtitle
-description:    这里是 LeanCloud 开放的一些与产品本身无关的资源
+description:    这里是 LeanCloud 开放的一些关于公司而不是产品的资源
 
 # Base URL, this is useful when I need to build site in a sub-directory (like GitHub Pages for Projects), it provides a specific URL prefix, for example, if the production site URL is http://sparanoid.com/lab/version/, set `base` to `/lab/version/24`, without trailing slash.
 # Default:      null
@@ -67,7 +67,7 @@ feed:           /feed.xml
 url:            http://open.leancloud.cn
 
 # Media assets URL used in posts, without trailing slash. ie. `<img href="{{ site.file }}/image.png">`. In the most cases this URL should be powered by a CDN provider
-file:           http://rsrc.sparanoid.com
+file:           http://open.leancloud.cn
 
 # Download files URL used in posts, ie. href="{{ site.download }}/package.zip", this should also be a CDN link just like `site.url`. There's no differences in `site.url` and `site.download`, I just use one CDN for post images and another for large download files. That's it. Remove or ignore this if you don't need it
 download:       http://dl.sparanoid.com
@@ -129,3 +129,5 @@ remote_dir:     /srv/www/sparanoid.com/public_html
 
 # Amazon S3 Bucket variable for s3cmd
 s3_bucket:      s3://sparanoid/
+
+ga_tracking_code: UA-42629236-5
