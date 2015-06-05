@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 文案风格指南
-category: doc
+category: guide
 lang: zh
 ---
 

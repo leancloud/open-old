@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 技术支持标准
-category: doc
+category: guide
 lang: zh
 ---
 

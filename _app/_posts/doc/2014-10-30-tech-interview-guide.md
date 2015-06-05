@@ -2,7 +2,7 @@
 layout: post
 title: 技术面试指南
 lang: zh
-category: doc
+category: guide
 ---
 
 ## 面试流程
