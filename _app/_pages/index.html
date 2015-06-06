@@ -16,13 +16,18 @@ permalink: /
     <small><a href="http://leancloud.cn/">LeanCloud</a> 开放资源</small>
   </header>
 
-  <h2>管理</h2>
-  {% for post in site.categories.management %}
-    {% include page-item.html %}
-  {% endfor %}
+  <div class="page-content">
 
-  <h2>指南</h2>
-  {% for post in site.categories.guide %}
-    {% include page-item.html %}
-  {% endfor %}
+    <h2>管理</h2>
+    {% for post in site.categories.management %}
+      {% include page-item.html %}
+    {% endfor %}
+
+    <h2>指南</h2>
+    {% for post in site.categories.guide %}
+      {% include page-item.html %}
+    {% endfor %}
+
+  </div>
+
 </article>
