@@ -26,7 +26,7 @@ Tag: 对应每个发布版本的 tag。SDK 和应用程序的 tag 遵照 `<major
 
 ## 发布新版流程
 
-- 确保所有要发布的 pull request 都已经 marge 到 `master`；
+- 确保所有要发布的 pull request 都已经 merge 到 `master`；
 - 使用 `master` branch 的代码进行测试，如果发现 bug，把对应的 bugfix merge 到 `master`；
 - 删除旧的 `release` branch，并从当前的 `master` 创建新的 `release` branch；
 - 在 Jenkins 上从 `release` branch 发起新的 build 并发布；
