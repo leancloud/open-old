@@ -74,6 +74,14 @@
       <small>
         By <span rel=author>{{ author.name }}</span>
         on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+
+        {% assign date_publish = page.date | date: "%b %-d, %Y" %}
+        {% assign date_update  = page.last_modified_at | date: "%b %-d, %Y" %}
+
+        {% if date_publish != date_update %}
+          <span class=post-modified-date><br>Updated <time datetime="{{ page.last_modified_at | date: "%FT%X+08:00" }}">{{ page.last_modified_at | date: "%A, %b %d, %Y" }}</time></span>
+        {% endif %}
+
       </small>
     {% endif %}
 
