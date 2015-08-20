@@ -1,0 +1,99 @@
+<!-- Post-wide custom CSS -->
+{{ amsf_page_css }}
+
+<!-- Prepare for image headers -->
+{% capture amsf_page_heading_type_img %}
+  <img
+    src="{{ site.file }}/{{ page.img-headline }}"
+    alt="{{ page.title | strip_html | xml_escape }}"
+    {% if page.img-headline-width %}
+      style="width: {{ page.img-headline-width | times: 0.1 }}vw;"
+    {% else %}
+      style="width: 50vw;"
+    {% endif %}
+  >
+{% endcapture %}
+
+<!-- Prepare for SVG header -->
+{% capture amsf_page_heading_type_svg %}
+  <img
+    src="{{ site.assets | prepend: site.base }}/{{ page.svg-headline }}"
+    {% if page.svg-headline-width %}
+      style="width: {{ page.svg-headline-width | times: 0.1 }}vw;"
+    {% else %}
+      style="width: 50vw;"
+    {% endif %}
+  >
+{% endcapture %}
+
+{% capture amsf_page_heading_text %}
+  {% if page.img-headline %}
+    {{ page.title }}
+    {{ amsf_page_heading_type_img }}
+  {% elsif page.svg-headline %}
+    {{ page.title }}
+    {{ amsf_page_heading_type_svg }}
+  {% else %}
+    {{ page.title }} <span></span>
+  {% endif %}
+{% endcapture %}
+
+{% capture amsf_page_heading_class %}
+  {% if page.img-headline or page.svg-headline %}
+    image-title
+  {% endif %}
+{% endcapture %}
+
+{% capture amsf_page_heading_external %}
+  {% if page.link %}
+    class=external
+  {% endif %}
+{% endcapture %}
+
+{% capture amsf_page_heading %}
+  {% if page.link %}
+    <a href="{{ page.link }}" class=external>
+      {{ amsf_page_heading_text }}
+    </a>
+  {% else %}
+    {{ amsf_page_heading_text }}
+  {% endif %}
+{% endcapture %}
+
+<!-- Article wrapper, limit width -->
+<article {{ amsf_page_lang }}>
+
+  <!-- Post title -->
+  <header>
+
+    <h1 class="{{ amsf_page_heading_class }}" title="{{ page.title | strip_html | xml_escape }}">
+      {{ amsf_page_heading }}
+    </h1>
+
+    {% if page.date %}
+      <small>
+        By <span rel=author>{{ author.name }}</span>
+        on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+
+        {% assign date_publish = page.date | date: "%b %-d, %Y" %}
+        {% assign date_update  = page.last_modified_at | date: "%b %-d, %Y" %}
+
+        {% if date_publish != date_update %}
+          <span class=post-modified-date><br>Updated <time datetime="{{ page.last_modified_at | date: "%FT%X+08:00" }}">{{ page.last_modified_at | date: "%A, %b %d, %Y" }}</time></span>
+        {% endif %}
+
+      </small>
+    {% endif %}
+
+    {% if page.desc %}
+      <small>{{ page.desc }}</small>
+    {% endif %}
+
+  </header>
+
+  <!-- Post content -->
+  <div class=post-content>
+    {{ content }}
+  </div>
+
+</article>

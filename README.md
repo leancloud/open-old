@@ -7,9 +7,16 @@
 ## 本地搭建烹饪指南（简易）
 
 ```sh
+# Init project
 $ git clone git@github.com:leancloud/open.git
 $ bundle install && npm install
 $ grunt serve
+
+# Update AMSF
+$ grunt amsf-update
+
+# Release new version
+$ grunt release
 ```
 
 更多资讯请参考 [sparanoid/almace-scaffolding](https://github.com/sparanoid/almace-scaffolding)
@@ -24,9 +31,9 @@ $ grunt serve
 
 - 更新 `./_app/_posts` 下的对应 `.md` 文件。如果是重要更新应在文件末尾加注更新内容及日期。
 
-### 样式更新
+### 样式／脚本自定义
 
-- 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less)，文件变更后刷新浏览器即可实时查看变更
+- 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less) 或 [`./_app/assets/_js/custom.js`](/_app/assets/_js/custom.js)，文件变更后刷新浏览器即可实时查看变更
 
 ### 如何从 Atom feed 中隐藏文章
 

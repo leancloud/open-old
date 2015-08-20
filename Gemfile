@@ -1,6 +1,7 @@
-source 'https://ruby.taobao.org/'
+source 'https://rubygems.org'
 
 group :development do
-  gem 'jekyll', '>= 3.0.0.beta2'
-  gem 'jekyll-last-modified-at', '>= 0.3.4'
+  gem 'jekyll', '>= 3.0.0.pre.beta8'
+  gem 'jekyll-last-modified-at'
+  gem 'stringex'
 end
