@@ -25,21 +25,21 @@ $ grunt release
 
 ### 增加新条目
 
-- 在 `./_app/_posts` 下的对应子目录增加新的 `.md` 文件，文件名应符合 `yyyy-mm-dd-title.md` 的格式。
+在 `./_app/_posts` 下的对应子目录增加新的 `.md` 文件，文件名应符合 `yyyy-mm-dd-title.md` 的格式。
 
 ### 更新现有条目
 
-- 更新 `./_app/_posts` 下的对应 `.md` 文件。如果是重要更新应在文件末尾加注更新内容及日期。
+更新 `./_app/_posts` 下的对应 `.md` 文件。如果是重要更新应在文件末尾加注更新内容及日期。
 
 ### 样式／脚本自定义
 
-- 在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less) 或 [`./_app/assets/_js/custom.js`](/_app/assets/_js/custom.js)，文件变更后刷新浏览器即可实时查看变更
+在 `grunt serve` 激活的情况下编辑 [`./_app/assets/_less/custom.less`](/_app/assets/_less/custom.less) 或 [`./_app/assets/_js/custom.js`](/_app/assets/_js/custom.js)，文件变更后刷新浏览器即可实时查看变更
 
 ### 如何从 Atom feed 中隐藏文章
 
-- 在该文章的 YAML front-matter 数据中添加如下字段：
+在该文章的 YAML front-matter 数据中添加如下字段：
 
-```
+```yaml
 hidden: true
 ```
 
