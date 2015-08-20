@@ -1,10 +1,10 @@
 {
   "name": "almace-scaffolding",
-  "version": "0.0.36",
+  "version": "0.0.1",
   "description": "Almace Scaffolding, a super-fast Jekyll framework",
   "author": "Tunghsiao Liu",
   "homepage": "http://sparanoid.com/lab/amsf/",
-  "main": "Gruntfile.coffee",
+  "main": "Gruntfile.coffeelintfee",
   "scripts": {
     "test": "grunt test"
   },
