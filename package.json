@@ -1,22 +1,23 @@
 {
-  "name": "almace-scaffolding",
+  "name": "leancloud-open",
   "version": "0.0.1",
-  "description": "Almace Scaffolding, a super-fast Jekyll framework",
+  "description": "LeanCloud Public Resources",
   "author": "Tunghsiao Liu",
-  "homepage": "http://sparanoid.com/lab/amsf/",
-  "main": "Gruntfile.coffeelintfee",
+  "homepage": "http://open.leancloud.cn/",
+  "main": "Gruntfile.coffee",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sparanoid/almace-scaffolding.git"
+    "url": "git://github.com/leancloud/open.git"
   },
   "bugs": {
-    "url": "http://github.com/sparanoid/almace-scaffolding/issues"
+    "url": "http://github.com/leancloud/open/issues"
   },
   "license": "MIT",
   "keywords": [
+    "leancloud",
     "amsf",
     "jekyll",
     "blog",
