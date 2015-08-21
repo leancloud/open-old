@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 余光中：怎样改进英式中文？<span class=em-dash-fix>——</span>论中文的常态与变态
+title: 余光中：怎样改进英式中文？<span class="em-dash-fix">——</span>论中文的常态与变态
 category: note
 hidden: true
 lang: zh
