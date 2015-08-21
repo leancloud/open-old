@@ -1,18 +1,20 @@
+// Custom user scripts
+
 // Quote marks fix
 +function addMarginFix() {
   var para = document.querySelectorAll("p, li");
 
   for (var i = 0; i < para.length; i++) {
-    var firstLetter = para[i].innerHTML.charAt(0);
-    var regex = /「|“/;
+    var firstLetter = para[i].innerHTML.trim().charAt(0);
+    var regex = /「|『|“/;
 
     if (firstLetter.match(regex)) {
-      para[i].className += ' ' + "margin-fix";
+      para[i].className += ' ' + "leading-indent-fix";
     }
   }
 }();
 
-// Custom user scripts
+// GA tracking code
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
