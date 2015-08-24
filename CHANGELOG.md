@@ -1,3 +1,20 @@
+<a name="0.0.2"></a>
+## [0.0.2](https://github.com/leancloud/open/compare/v0.0.1...v0.0.2) (2015-08-24)
+
+
+### Bug Fixes
+
+* **jekyll:** CSS classes not parsing ([02d906e](https://github.com/leancloud/open/commit/02d906e))
+* **post:** blockquotes not parsing ([1c53544](https://github.com/leancloud/open/commit/1c53544))
+
+### Features
+
+* **script:** add quote mark fix via script ([421d6d4](https://github.com/leancloud/open/commit/421d6d4))
+* **template:** use global GA tracking code ([1b9a372](https://github.com/leancloud/open/commit/1b9a372))
+* **theme:** minor update ([ff61fcf](https://github.com/leancloud/open/commit/ff61fcf))
+
+
+
 <a name="0.0.1"></a>
 ## 0.0.1 (2015-08-20)
 
