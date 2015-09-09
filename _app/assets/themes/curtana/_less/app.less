@@ -52,7 +52,7 @@ body {
   text-rendering: optimizelegibility;
   background: @background-color;
   image-rendering: optimizequality;
-  transition: all .3s ease .2s;
+  transition: all .2s ease;
 
   @media (max-width: @breakpoint-md) {
     padding-left: @padding-md;
@@ -103,7 +103,6 @@ body {
   font-family: @sans-serif;
   font-size: 72%;
   font-weight: normal;
-  letter-spacing: .08em;
   opacity: .5;
 }
 
@@ -338,6 +337,9 @@ body:hover .latest {
       // Override margin from article img
       svg,
       img {
+        // avoid header stretched by global img styles
+        margin-left: 0;
+        margin-right: 0;
         margin-bottom: .3em;
 
         @media (max-width: @breakpoint-sm) {
@@ -367,7 +369,6 @@ body:hover .latest {
     small {
       display: block;
       margin-top: 2vmin;
-      letter-spacing: .1em;
     }
   }
 
@@ -397,25 +398,28 @@ body:hover .latest {
     display: block;
     max-width: 100%;
     margin: 0 0 1.8rem;
-  }
 
-  p:not(.browser) {
 
-    img, video, iframe {
+    @media (max-width: @breakpoint-md) {
+      margin-left: -@padding-md;
+      margin-right: -@padding-md;
+      max-width: calc(100% + (@padding-md * 2));
+      width: calc(100% + (@padding-md * 2));
+    }
 
-      @media (max-width: @breakpoint-md) {
-        margin-left: -@padding-md;
-        margin-right: -@padding-md;
-        max-width: calc(100% + (@padding-md * 2));
-        width: calc(100% + (@padding-md * 2));
-      }
+    @media (max-width: @breakpoint-sm) {
+      margin-left: -@padding-sm;
+      margin-right: -@padding-sm;
+      max-width: calc(100% + (@padding-sm * 2));
+      width: calc(100% + (@padding-sm * 2));
+    }
 
-      @media (max-width: @breakpoint-sm) {
-        margin-left: -@padding-sm;
-        margin-right: -@padding-sm;
-        max-width: calc(100% + (@padding-sm * 2));
-        width: calc(100% + (@padding-sm * 2));
-      }
+    // avoid images with `.no-enlarge` stretched by global img styles
+    &.no-enlarge {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 100%;
+      width: auto;
     }
   }
 
@@ -476,9 +480,9 @@ body:hover .latest {
   }
 
   // Only apply word breaking rule for codes in paragraphs
-  p code {
-    word-break: break-word;
-    word-wrap: break-word;
+  p code,
+  li code {
+    word-break: break-all;
   }
 
   pre {
@@ -568,12 +572,16 @@ body:hover .latest {
 }
 
 // Posts with Asian characters
-[lang=zh],
-[lang=ja] {
+:lang(zh),
+:lang(ja) {
   text-align: justify;
 
   header {
-    text-align: start;
+
+    &,
+    & * {
+      text-align: start;
+    }
   }
 }
 
@@ -598,7 +606,6 @@ body:hover .latest {
 .browser {
   position: relative;
   padding-top: 24px;
-  margin: 0 0 1.8rem !important;
   background: rgba(255, 255, 255, .1);
   border-radius: 5px 5px 0 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .05);
@@ -623,18 +630,13 @@ body:hover .latest {
   }
 
   img {
-    margin: 0;
+    // avoid images inside .browser stretched by global img styles
+    margin-left: 0;
+    margin-right: 0;
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, .05);
 
     // Reset borwser image width for small screens
-    @media (max-width: @breakpoint-md) {
-      margin: 0;
-      max-width: 100%;
-      width: 100%;
-    }
-
-    @media (max-width: @breakpoint-sm) {
-      margin: 0;
+    @media (max-width: @breakpoint-md), (max-width: @breakpoint-sm) {
       max-width: 100%;
       width: 100%;
     }

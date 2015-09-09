@@ -1,7 +1,7 @@
 <!-- Footer section -->
 {% if page.permalink == '/' and site.data.curtana.clean_homepage %}
 {% else %}
-  <footer class=footer>
+  <footer class="footer">
     <ul>
       <li><a href="{{ site.base }}/">{{ site.name }}</a></li>
 
@@ -17,4 +17,37 @@
       <li><a href="{{ amsf_feed_url }}" title="Feed - Atom (The Atom Syndication Format)">Atom</a></li>
     </ul>
   </footer>
+{% endif %}
+
+<!-- The following code is an example use of including external JavaScript libraries -->
+{% if page.plugin == 'intense' %}
+  <script src="{{ '/js/intense.js' | prepend: amsf_theme_assets }}"></script>
+  <script>
+    window.onload = function() {
+      var fx = document.querySelectorAll('p > img:not(.no-intense)');
+      var el = document.body;
+      var cl = 'loaded'
+
+      if (el.classList)
+        el.classList.add(cl);
+      else
+        el.className += ' ' + cl;
+
+      Intense(fx);
+    }
+  </script>
+{% endif %}
+
+<!-- Theme scripts -->
+<script src="{{ '/js/app.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
+
+<!-- User custom scripts -->
+<script src="{{ '/js/custom.js?assets-inline' | prepend: amsf_user_assets }}"></script>
+
+<!-- Google Analytics tracking code -->
+{{ amsf_google_analytics }}
+
+<!-- Foot hooks -->
+{% if page.foot %}
+  {{ page.foot }}
 {% endif %}
