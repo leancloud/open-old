@@ -1,6 +1,7 @@
 # [open.leancloud.cn](http://open.leancloud.cn/)
 [![Build Status](https://travis-ci.org/leancloud/open.svg)](https://travis-ci.org/leancloud/open)
 [![devDependency Status](https://david-dm.org/leancloud/open/dev-status.svg)](https://david-dm.org/leancloud/open#info=devDependencies)
+[![Built with Almace Scaffolding](https://d349cztnlupsuf.cloudfront.net/amsf-badge.svg)](http://sparanoid.com/lab/amsf/)
 
 这里是 LeanCloud 开放的一些与产品本身无关的资源
 
