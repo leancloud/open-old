@@ -1,13 +1,16 @@
 // Global variables
-@base-font-size: 1.6vw;
-@base-line-height: (20 / 14); // ~ 1.428571429
+@fontstack-sans-serif: "Helvetica Neue", Arial, sans-serif;
+@fontstack-serif: Georgia, serif;
+@fontstack-monospace: Menlo, monospace;
+@fontstack-default: @fontstack-sans-serif;
+@font-size: 1.6vw;
+@line-height: (20 / 14); // ~ 1.428571429
+
 @link-color: #a212d1;
 @background-color: #fff;
 @text-color: #000;
 @code-color: spin(@link-color, 180);
-@sans-serif: "Helvetica Neue",  "Hiragino Sans GB", Arial, sans-serif;
-@serif: Georgia, "Hiragino Mincho ProN", serif;
-@monospace: Menlo, monospace;
+
 @breakpoint-lg: 1600px;
 @breakpoint-md: 1000px;
 @breakpoint-sm: 640px;
@@ -46,9 +49,9 @@
 body {
   padding: 0 @padding-lg;
   margin: 0 auto 0;
-  font-family: @sans-serif;
-  font-size: @base-font-size;
-  line-height: @base-line-height;
+  font-family: @fontstack-default;
+  font-size: @font-size;
+  line-height: @line-height;
   color: @text-color;
   text-rendering: optimizelegibility;
   background: @background-color;
@@ -58,17 +61,17 @@ body {
   @media (max-width: @breakpoint-md) {
     padding-left: @padding-md;
     padding-right: @padding-md;
-    font-size: (@base-font-size * 1.4);
+    font-size: (@font-size * 1.4);
   }
 
   @media (max-width: @breakpoint-sm) {
     padding-left: @padding-sm;
     padding-right: @padding-sm;
-    font-size: (@base-font-size * 2.4);
+    font-size: (@font-size * 2.4);
   }
 
   @media (max-width: @breakpoint-xs) {
-    font-size: (@base-font-size * 3.2);
+    font-size: (@font-size * 3.2);
   }
 
   // All iOS devices, the easiest way
@@ -93,7 +96,6 @@ body {
 
 // Essential mixins
 .heading {
-  font-family: @sans-serif;
   font-size: 330%;
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
@@ -101,7 +103,6 @@ body {
 }
 
 .sub-heading {
-  font-family: @sans-serif;
   font-size: 72%;
   font-weight: normal;
   opacity: .5;
@@ -134,8 +135,9 @@ a, button {
 
   &:hover,
   &:focus {
-    border-bottom: .1em solid;
     transition: color .1s ease, border-color .1s ease, background .1s ease, opacity .1s ease;
+    text-decoration: underline;
+    text-decoration-skip: ink;
   }
 
   &[disabled] {
@@ -204,7 +206,7 @@ del {
       &:hover,
       &:focus {
         color: @link-color;
-        border: none;
+        text-decoration: none;
       }
     }
   }
@@ -313,7 +315,7 @@ body:hover .latest {
 
   p {
     margin-bottom: 1.6rem;
-    line-height: (@base-line-height * 1.2);
+    line-height: (@line-height * 1.2);
   }
 
   header {
@@ -383,7 +385,7 @@ body:hover .latest {
     margin-left: 1.2em;
 
     li {
-      line-height: (@base-line-height * 1.2);
+      line-height: (@line-height * 1.2);
 
       > ul, ol {
         margin-bottom: 0;
@@ -473,7 +475,7 @@ body:hover .latest {
   }
 
   code, pre {
-    font-family: @monospace;
+    font-family: @fontstack-monospace;
     color: @code-color;
   }
 
@@ -488,7 +490,7 @@ body:hover .latest {
     margin: 0 0 1.8rem;
     overflow-x: scroll;
     font-size: 80%;
-    line-height: (@base-line-height * 1.2);
+    line-height: (@line-height * 1.2);
     background: fade(#08f, 4%);
     // Bouncing scroll fix for iOS
     -webkit-overflow-scrolling: touch;
@@ -589,8 +591,9 @@ body:hover .latest {
 }
 
 // Tweet button margin fix
-.tweet {
-  margin-top: 10vmin;
+.post-modified-date {
+  font-size: 75%;
+  opacity: .5;
 }
 
 // Largetype styles (replaces button styles)
@@ -639,6 +642,17 @@ body:hover .latest {
     width: auto;
     max-width: 100%;
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, .05);
+  }
+}
+
+// Extra offset for OS X screenshots
+.screenshot-mac {
+  margin-left: -56px;
+  margin-right: -56px;
+
+  @media (max-width: @breakpoint-md), (max-width: @breakpoint-sm) {
+    margin-left: 0;
+    margin-right: 0
   }
 }
 
@@ -699,11 +713,6 @@ body:hover .latest {
 
   .external {
 
-    &:hover,
-    &:focus {
-      border: none;
-    }
-
     @media (max-width: @breakpoint-sm) {
       // Hide external link for post list
       display: none;
@@ -713,7 +722,7 @@ body:hover .latest {
 
 .external {
 
-  span {
+  .dot {
     display: inline-block;
     width: .7rem;
     height: .7rem;
@@ -722,12 +731,17 @@ body:hover .latest {
     background: @text-color;
     border-radius: 50%;
     transition: transform .4s ease;
+
+    // Extra margin for external symbol in singular
+    &--post {
+      margin-left: 1rem;
+    }
   }
 
   &:hover,
   &:focus {
 
-    span {
+    .dot {
       transform: scale(1.4);
     }
   }
