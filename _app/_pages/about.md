@@ -10,7 +10,6 @@ desc: 关于
 ## Colophon
 
 [LeanCloud Blog](http://blog.leancloud.cn/) -
-[Jekyll](http://jekyllrb.com/) ([Source](https://github.com/leancloud/open)) -
-[GitHub](http://github.com/)
+[AMSF](http://sparanoid.com/lab/amsf/) ([Source](https://github.com/leancloud/open)) -
 
 &copy; [LeanCloud](http://leancloud.cn/), all rights reserved.
