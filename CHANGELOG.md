@@ -1,3 +1,19 @@
+<a name="0.0.3"></a>
+## [0.0.3](https://github.com/leancloud/open/compare/v0.0.2...v0.0.3) (2016-03-01)
+
+
+### Bug Fixes
+
+* **amsf:** missing custom user assets ([390080a](https://github.com/leancloud/open/commit/390080a))
+
+### Features
+
+* **about:** update colophon ([187578b](https://github.com/leancloud/open/commit/187578b))
+* **script:** remove client-side leading quotes fix ([03f3a6d](https://github.com/leancloud/open/commit/03f3a6d))
+* **styles:** use PingFang SC ([8f282af](https://github.com/leancloud/open/commit/8f282af))
+
+
+
 <a name="0.0.2"></a>
 ## [0.0.2](https://github.com/leancloud/open/compare/v0.0.1...v0.0.2) (2015-08-24)
 
