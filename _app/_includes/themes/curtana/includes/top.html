@@ -4,20 +4,26 @@
   <meta charset="utf-8">
 {% endif %}
 
-<title>{{ amsf_page_title }}{{ amsf_site_title | strip }}</title>
+<title>{{ amsf_page_title }}{{ amsf_site_title }}</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Define a description for better SEO result -->
 <meta name="description" content="{{ amsf_site_desc | strip }}">
 
+<!-- Feed URL -->
 <link rel="alternate" href="{{ amsf_feed_url }}" type="application/atom+xml">
 
+<!-- Site icons -->
 {% if site.base %}
   <link rel="icon" href="{{ '/favicon.ico' | prepend: site.base }}">
   <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | prepend: site.base }}">
 {% endif %}
 
+<!-- Pinned icon for Safari -->
+<link rel="mask-icon" href="{{ '/favicon.svg' | prepend: site.base }}" color="{{ site.primary_color }}">
+
+<!-- Main CSS -->
 <link rel="stylesheet" href="{{ '/css/app.css?assets-inline' | prepend: amsf_theme_assets }}">
 
 <!-- Canonical links, avoid duplicate content problems -->
