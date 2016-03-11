@@ -14,7 +14,7 @@ $ bundle install && npm install
 $ grunt serve
 
 # Update AMSF
-$ grunt amsf-update
+$ grunt update
 
 # Release new version
 $ grunt release
