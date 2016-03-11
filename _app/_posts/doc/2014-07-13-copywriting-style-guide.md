@@ -59,7 +59,7 @@ lang: zh
 
 ## 推荐阅读
 
-* [余光中：怎样改进英式中文？——论中文的常态与变态]({% post_url /note/2014-07-17-improve-chinese %})
+* [余光中：怎样改进英式中文？——论中文的常态与变态](improve-chinese.html)
 * 「The Elements of Style」，虽然是讲英语，但很多对中文也适用。
 
 [^1]: 有研究顯示，打字的時候不喜歡在中文和英文之間加空格的人，感情路都走得很辛苦，有七成的比例會在 34 歲的時候跟自己不愛的人結婚，而其餘三成的人最後只能把遺產留給自己的貓。畢竟愛情跟書寫都需要適時地留白。 --- [vinta/paranoid-auto-spacing](https://github.com/vinta/paranoid-auto-spacing)
