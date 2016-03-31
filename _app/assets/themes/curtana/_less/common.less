@@ -2,30 +2,11 @@
 // Common
 // --------------------------------------------------
 
-// Site logo
-.logo {
-  display: block;
-  height: 1vmax;
-  margin: 0 0 1.4vmax;
-  background: @link-color;
-  opacity: 0;
-
-  &:hover,
-  &:focus {
-    border-bottom: none !important;
-    background: @text-color;
-    opacity: 1;
-  }
-
-  h1 {
-    height: 0;
-    text-indent: -99999em;
-  }
-}
-
 // Main navigation
+@nav-padding: 1.4vmax;
 .navigation {
-  margin: 0 0 16vmin;
+  padding-top: @nav-padding;
+  padding-bottom: @nav-padding;
   margin-right: -1.1em;
   margin-left: -1.1em;
   font-size: 60%;
@@ -157,11 +138,34 @@ body:hover .latest {
   }
 
   header {
+    display: flex;
+    min-height: calc(100vh - @nav-padding * 2 - 2ex);
+    padding-top: 10vmin;
     padding-bottom: 16vmin;
+    margin-bottom: 16vmin;
+    flex-direction: column;
+    justify-content: center;
+    background: fade(@text-color, 2%);
+    .padding-offset(@space-lg, @space-lg);
+    .margin-offset(-@space-lg, -@space-lg);
+
+    @media (max-width: @breakpoint-md) {
+      min-height: calc(64vh - @nav-padding * 2 - 2ex);
+      padding-top: 16vmin;
+      padding-bottom: 16vmin;
+      .padding-offset(@space-md, @space-md);
+      .margin-offset(-@space-md, -@space-md);
+    }
+
+    @media (max-width: @breakpoint-sm) {
+      .padding-offset(@space-sm, @space-sm);
+      .margin-offset(-@space-sm, -@space-sm);
+    }
 
     h1 {
-      margin: 0 0 .1em;
       .heading();
+      // visual align left
+      margin-left: -2px;
       hyphens: none;
       line-height: 1.1;
 
@@ -188,6 +192,11 @@ body:hover .latest {
           height: 100% !important;
         }
       }
+    }
+
+    // Reset subheading in page title (used by AMSF atm)
+    h2 {
+      margin: 1.2vmin 0 0;
     }
 
     // Hide actual text if post title is image or SVG, the actual text helps Safari get the real post title in Reader mode.
@@ -225,20 +234,44 @@ body:hover .latest {
   ul,
   ol {
     margin-bottom: 1.8rem;
-    margin-left: 1.2em;
+    list-style: none;
+    counter-reset: list;
+
+    @media (max-width: @breakpoint-sm) {
+      margin-left: 1em;
+    }
 
     li {
       line-height: (@line-height * 1.2);
 
+      &:before {
+        position: absolute;
+        display: inline-block;
+        width: 4em;
+        margin-left: -4em;
+        font-size: 80%;
+        line-height: (@line-height * 1.2 / .8);
+        text-align: right;
+        opacity: .6;
+      }
+
       > ul,
       > ol {
+        margin-left: 1em;
         margin-bottom: 0;
       }
     }
   }
 
-  ol {
-    margin-left: 1.75em;
+  ul li:before {
+    content: "•";
+    padding-right: .6em;
+  }
+
+  ol li:before {
+    counter-increment: list;
+    content: counter(list) ".";
+    padding-right: .3em;
   }
 
   img,
@@ -250,13 +283,13 @@ body:hover .latest {
     margin: 0 calc(-@space-xs - @border-default) 1.8rem;
 
     @media (max-width: @breakpoint-md) {
-      .margin-offset(-@space-md, -@space-md);
       width: calc(100% + (@space-md * 2));
+      .margin-offset(-@space-md, -@space-md);
     }
 
     @media (max-width: @breakpoint-sm) {
-      .margin-offset(-@space-sm, -@space-sm);
       width: calc(100% + (@space-sm * 2));
+      .margin-offset(-@space-sm, -@space-sm);
     }
 
     // avoid images with `.no-enlarge` stretched by global img styles
@@ -405,9 +438,78 @@ body:hover .latest {
     .margin-offset(-@space-xs, -@space-xs);
     margin-bottom: 1.8rem;
 
+    // TODO: responsive table support
+    // display: inline-block;
+    // overflow-x: auto;
+    // white-space: nowrap;
+
+    // TODO: table shadow support
+    // background-image: radial-gradient(ellipse at left, rgba(0, 0, 0, .02) 0%, rgba(0, 0, 0, 0) 75%),
+    //                   radial-gradient(ellipse at right, rgba(0, 0, 0, .02) 0%, rgba(0, 0, 0, 0) 75%);
+    // background-size: 30px 100%, 30px 100%;
+    // background-position: 0 center, 100% center;
+    // background-attachment: scroll, scroll;
+    // background-repeat: no-repeat;
+
+    // TODO: responsive table support
+    @media (max-width: @breakpoint-md) {
+      width: calc(100% + (@space-md * 2));
+      .margin-offset(-@space-md, -@space-md);
+    }
+
+    @media (max-width: @breakpoint-sm) {
+      width: calc(100% + (@space-sm * 2));
+      .margin-offset(-@space-sm, -@space-sm);
+
+      // TODO: table shadow support
+      // Darker shadow for mobile devices
+      // background-image: radial-gradient(ellipse at left, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0) 75%),
+      //                   radial-gradient(ellipse at right, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0) 75%);
+    }
+
     th,
     td {
       padding: .6em @space-xs;
+
+      &:first-child {
+        padding-left: @space-xs;
+        // TODO: table shadow support
+        // background-image: linear-gradient(to right, #fff 50%, rgba(255, 255, 255, 0) 100%);
+        // background-repeat: no-repeat;
+        // background-position: 0 0;
+        // background-size: 50px 100%;
+      }
+
+      &:last-child {
+        padding-right: @space-xs;
+        // TODO: table shadow support
+        // background-image: linear-gradient(to left, #fff 50%, rgba(255, 255, 255, 0) 100%);
+        // background-repeat: no-repeat;
+        // background-position: 100% 0;
+        // background-size: 50px 100%;
+      }
+
+      @media (max-width: @breakpoint-md) {
+
+        &:first-child {
+          padding-left: @space-md;
+        }
+
+        &:last-child {
+          padding-right: @space-md;
+        }
+      }
+
+      @media (max-width: @breakpoint-sm) {
+
+        &:first-child {
+          padding-left: @space-sm;
+        }
+
+        &:last-child {
+          padding-right: @space-sm;
+        }
+      }
     }
 
     th {
@@ -438,7 +540,24 @@ body:hover .latest {
 
 // Fix empty space when a paragraph starts with quote marks and some asian punctuation marks
 .leading-indent-fix {
-  text-indent: -.39em;
+
+  & { text-indent: -.39em; }
+  &--double-quotes { text-indent: -.45em; }
+  &--single-quotes { text-indent: -.28em; }
+  &--chinese-corner-bracket { text-indent: -.6em; }
+  &--chinese-white-corner-bracket { text-indent: -.56em; }
+  &--fullwidth-parenthesis { text-indent: -.62em; }
+
+  // Special heading indent fix with `@heading-letter-spacing` offset
+  h1& {
+    &--double-quotes { text-indent: (-.45em - @heading-letter-spacing); }
+    &--single-quotes { text-indent: (-.28em - @heading-letter-spacing); }
+  }
+
+  // Reset indent for list, otherwise it looks weird
+  li & {
+    text-indent: 0;
+  }
 }
 
 // Tweet button margin fix

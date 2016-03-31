@@ -67,13 +67,13 @@ module.exports = (grunt) ->
         tasks: ["coffeelint:gruntfile"]
 
       js:
-        files: ["<%= config.app %>/**/_js/*.js"]
+        files: ["<%= config.app %>/**/_js/**/*.js"]
         tasks: ["copy:serve"]
         options:
           interrupt: true
 
       less:
-        files: ["<%= config.app %>/**/_less/*.less"]
+        files: ["<%= config.app %>/**/_less/**/*.less"]
         tasks: [
           "less:serve"
           "postcss:serve"
@@ -247,7 +247,8 @@ module.exports = (grunt) ->
 
     leading_quotes:
       options:
-        elements: "p, li, h1, h2, h3, h4, h5, h6"
+        elements: "p, h1, h2, h3, h4, h5, h6"
+        regex: /「|『|“|‘|（/
         class: "leading-indent-fix"
         verbose: true
 
@@ -303,16 +304,16 @@ module.exports = (grunt) ->
       options:
         stdout: true
 
-      # Direct sync compiled static files to remote server
-      sync_server:
-        command: "rsync -avz -e 'ssh -p <%= config.deploy.sftp.port %>' --delete --progress <%= config.deploy.ignore_files %> <%= config.dist %>/ <%= config.deploy.sftp.user %>@<%= config.deploy.sftp.host %>:<%= config.deploy.sftp.dest %> > rsync-sftp.log"
+      # Direct rsync compiled static files to remote server
+      amsf__deploy__rsync:
+        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.port %>' --delete --progress <%= config.deploy.ignore_files %> <%= config.dist %>/ <%= config.deploy.rsync.user %>@<%= config.deploy.rsync.host %>:<%= config.deploy.rsync.dest %> > deploy-rsync.log"
 
       # Copy compiled static files to local directory for further post-process
-      sync_local:
-        command: "rsync -avz --delete --progress <%= config.deploy.ignore_files %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > rsync-s3_website.log"
+      amsf__deploy__sparanoid__copy_to_local:
+        command: "rsync -avz --delete --progress <%= config.deploy.ignore_files %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > deploy-s3_website.log"
 
       # Auto commit untracked files sync'ed from sync_local
-      sync_commit:
+      amsf__deploy__sparanoid__auto_commit:
         command: "sh <%= config.deploy.s3_website.dest %>/auto-commit '<%= config.pkg.name %>'"
 
       amsf__core__update_deps:
@@ -621,16 +622,23 @@ module.exports = (grunt) ->
       "bump-commit"
     ]
 
-  grunt.registerTask "sync", "Build site + rsync static files to remote server",  ->
+  grunt.registerTask "default", "Default task aka. build task",  ->
     grunt.task.run [
       "build"
-      "shell:sync_local"
     ]
-    if grunt.option("deploy")
-      grunt.task.run [
-        "shell:sync_commit"
-      ]
 
-  grunt.registerTask "default", "Default task aka. build task", [
-    "build"
-  ]
+    # Deploy options
+    if grunt.option("deploy") is "rsync"
+      grunt.task.run [
+        "shell:amsf__deploy__rsync"
+      ]
+    else if grunt.option("deploy") is "sparanoid"
+      if grunt.option("no-commit")
+        grunt.task.run [
+          "shell:amsf__deploy__sparanoid__copy_to_local"
+        ]
+      else
+        grunt.task.run [
+          "shell:amsf__deploy__sparanoid__copy_to_local"
+          "shell:amsf__deploy__sparanoid__auto_commit"
+        ]

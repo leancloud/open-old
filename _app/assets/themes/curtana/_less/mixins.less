@@ -16,10 +16,10 @@
 }
 
 .heading() {
-  font-size: 330%;
+  font-size: 360%;
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
-  letter-spacing: -.06em;
+  letter-spacing: @heading-letter-spacing;
 }
 
 .sub-heading() {
@@ -39,7 +39,7 @@
 }
 
 .spliter() {
-  @size: 4px;
+  @size: 3px;
   @color: @text-color;
 
   &::before {
@@ -50,6 +50,6 @@
     margin: 2em auto;
     border-radius: 50%;
     background: @color;
-    box-shadow: (@size * 5) 0 0 0 @color, (@size * -5) 0 0 0 @color;
+    box-shadow: (@size * 8) 0 0 0 @color, (@size * -8) 0 0 0 @color;
   }
 }
