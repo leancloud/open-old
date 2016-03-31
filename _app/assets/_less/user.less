@@ -5,12 +5,9 @@
 @font-size: 1.5vw;
 @line-height: 1.6;
 
+// Lighter font weight mainly for PingFang
 body {
   font-weight: 300;
-}
-
-.leading-indent-fix {
-  text-indent: -.46em;
 }
 
 // Alternative title color switch
@@ -33,12 +30,8 @@ body {
 @background-color: #fff;
 @text-color: #000;
 
-.content header h2.title-fix {
-  margin-left: -0.04em;
-}
-
-.post-modified-date {
-  opacity: .4;
+.content header {
+  background: linear-gradient(to bottom, lighten(@link-color, 40%) 0%, #fff 100%);
 }
 
 .em-dash-fix {
@@ -57,9 +50,4 @@ body {
   header {
     text-align: start;
   }
-}
-
-// Since most contents are written in Chinese, avoid italic.
-.footnotes {
-  font-style: normal;
 }
