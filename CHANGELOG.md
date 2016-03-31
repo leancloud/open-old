@@ -1,3 +1,21 @@
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/leancloud/open/compare/v0.0.3...v0.0.4) (2016-03-31)
+
+
+### Bug Fixes
+
+* **docs:** revert readme [ci skip] ([6014a9d](https://github.com/leancloud/open/commit/6014a9d))
+* **docs:** wrong link location ([f2418e5](https://github.com/leancloud/open/commit/f2418e5))
+* **jekyll:** avoid deprecation warning ([bc53014](https://github.com/leancloud/open/commit/bc53014))
+* **post:** wrong blockquote usage ([f19c760](https://github.com/leancloud/open/commit/f19c760))
+* **styles:** wrong custom variables for new stylesheet ([a07bbac](https://github.com/leancloud/open/commit/a07bbac))
+
+### Features
+
+* **styles:** minor changes for new theme layout ([cf0cd3f](https://github.com/leancloud/open/commit/cf0cd3f))
+
+
+
 <a name="0.0.3"></a>
 ## [0.0.3](https://github.com/leancloud/open/compare/v0.0.2...v0.0.3) (2016-03-01)
 
