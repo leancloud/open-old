@@ -12,8 +12,8 @@ body {
 
 // Alternative title color switch
 // Uncomment the following style will enalbe alternative post title color, this is useful when you're using the custom theme from above.
-.content { .list h2 a, header h1, header h1 a { color: @link-color; } }
-.external span { background: @link-color; }
+// .content { .list h2 a, header h1, header h1 a { color: @link-color; } }
+// .external span { background: @link-color; }
 
 // Alternative title size
 // By default all heading levels have the same font size, but many people may not like this, so here's an alternative font size stack:
@@ -31,7 +31,16 @@ body {
 @text-color: #000;
 
 .content header {
-  background: linear-gradient(to bottom, lighten(@link-color, 40%) 0%, #fff 100%);
+  @header-w: 603px;
+  @header-h: 360px;
+  @header-factor: 1.6;
+  color: @background-color;
+  background: @link-color url('/assets/img/bg.png') center center;
+  background-size: (@header-w * @header-factor) (@header-h * @header-factor);
+
+  a {
+    color: @background-color;
+  }
 }
 
 .em-dash-fix {
