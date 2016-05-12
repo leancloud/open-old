@@ -1,3 +1,17 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/leancloud/open/compare/v0.0.4...v0.0.5) (2016-05-12)
+
+
+### Bug Fixes
+
+* **post:** wrong paragraph in “余光中：怎样改进英式中文？——论中文的常态与变态” ([2c66e65](https://github.com/leancloud/open/commit/2c66e65))
+
+### Features
+
+* add header background image ([f7d1a07](https://github.com/leancloud/open/commit/f7d1a07))
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/leancloud/open/compare/v0.0.3...v0.0.4) (2016-03-31)
 
