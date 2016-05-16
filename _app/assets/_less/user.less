@@ -31,12 +31,10 @@ body {
 @text-color: #000;
 
 .content header {
-  @header-w: 603px;
-  @header-h: 360px;
-  @header-factor: 1.6;
+  @header-factor: .64;
   color: @background-color;
   background: @link-color url('/assets/img/bg.png') center center;
-  background-size: (@header-w * @header-factor) (@header-h * @header-factor);
+  background-size: (100vw * @header-factor);
 
   a {
     color: @background-color;
