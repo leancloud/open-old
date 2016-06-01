@@ -245,6 +245,15 @@ module.exports = (grunt) ->
           dest: "<%= config.dist %>"
         ]
 
+    uncss_inline:
+      dist:
+        files: [
+          expand: true
+          cwd: "<%= config.dist %>"
+          src: "**/*.html"
+          dest: "<%= config.dist %>"
+        ]
+
     leading_quotes:
       options:
         elements: "p, h1, h2, h3, h4, h5, h6"
@@ -306,11 +315,11 @@ module.exports = (grunt) ->
 
       # Direct rsync compiled static files to remote server
       amsf__deploy__rsync:
-        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.port %>' --delete --progress <%= config.deploy.ignore_files %> <%= config.dist %>/ <%= config.deploy.rsync.user %>@<%= config.deploy.rsync.host %>:<%= config.deploy.rsync.dest %> > deploy-rsync.log"
+        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.port %>' --delete --progress <%= config.deploy.rsync.params %> <%= config.dist %>/ <%= config.deploy.rsync.user %>@<%= config.deploy.rsync.host %>:<%= config.deploy.rsync.dest %> > deploy-rsync.log"
 
       # Copy compiled static files to local directory for further post-process
       amsf__deploy__sparanoid__copy_to_local:
-        command: "rsync -avz --delete --progress <%= config.deploy.ignore_files %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > deploy-s3_website.log"
+        command: "rsync -avz --delete --progress <%= config.deploy.rsync.params %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > deploy-s3_website.log"
 
       # Auto commit untracked files sync'ed from sync_local
       amsf__deploy__sparanoid__auto_commit:
@@ -578,7 +587,7 @@ module.exports = (grunt) ->
     "less:serve"
     "postcss:serve"
     "jekyll:serve"
-    "leading_quotes:main"
+    "leading_quotes"
     "browserSync"
     "watch"
   ]
@@ -604,16 +613,16 @@ module.exports = (grunt) ->
     "postcss:dist"
     "csscomb"
     "jekyll:dist"
-    "leading_quotes:main"
+    "leading_quotes"
     "cssmin"
     "assets_inline"
+    "uncss_inline"
     "cacheBust"
     "concurrent:dist"
     "usebanner"
     "cleanempty"
   ]
 
-  # Release new version
   grunt.registerTask "release", "Build, bump and commit", (type) ->
     grunt.task.run [
       "bump-only:#{type or 'patch'}"
@@ -621,6 +630,17 @@ module.exports = (grunt) ->
       "replace:amsf__site__update_version"
       "bump-commit"
     ]
+
+  grunt.registerTask "deploy-sparanoid", "Deploy to remote server (for sparanoid.com)",  ->
+    if grunt.option("no-commit")
+      grunt.task.run [
+        "shell:amsf__deploy__sparanoid__copy_to_local"
+      ]
+    else
+      grunt.task.run [
+        "shell:amsf__deploy__sparanoid__copy_to_local"
+        "shell:amsf__deploy__sparanoid__auto_commit"
+      ]
 
   grunt.registerTask "default", "Default task aka. build task",  ->
     grunt.task.run [
@@ -633,12 +653,6 @@ module.exports = (grunt) ->
         "shell:amsf__deploy__rsync"
       ]
     else if grunt.option("deploy") is "sparanoid"
-      if grunt.option("no-commit")
-        grunt.task.run [
-          "shell:amsf__deploy__sparanoid__copy_to_local"
-        ]
-      else
-        grunt.task.run [
-          "shell:amsf__deploy__sparanoid__copy_to_local"
-          "shell:amsf__deploy__sparanoid__auto_commit"
-        ]
+      grunt.task.run [
+        "deploy-sparanoid"
+      ]
