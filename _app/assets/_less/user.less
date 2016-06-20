@@ -33,6 +33,7 @@ body {
 .content header {
   @header-factor: .64;
   color: @background-color;
+  min-height: calc(80vh - ((@nav-padding * 4)) - 5ex);
   background: @link-color url('/assets/img/bg.png') center center;
   background-size: (100vw * @header-factor);
 
