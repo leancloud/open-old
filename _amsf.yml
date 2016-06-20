@@ -1,0 +1,9 @@
+#
+# Almace Scaffolding preferences
+#
+
+# AMSF version
+version:        0.1.11
+
+# Current theme
+theme:          curtana
