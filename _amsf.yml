@@ -6,4 +6,5 @@
 version:        0.1.11
 
 # Current theme
-theme:          curtana
+amsf_theme:     curtana
+amsf_theme_url: https://github.com/amsf/amsf-curtana

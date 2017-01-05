@@ -97,7 +97,7 @@ pshh:           https://pubsubhubbub.appspot.com/
 
 # Used in atom feed, sitemap, Twitter Cards, and etc. I should use absolute full
 # URLs for these fields
-url:            http://open.leancloud.cn
+url:            https://open.leancloud.cn
 
 # Media assets URL used in posts, without trailing slash. ie.
 # `<img src="{{ site.file }}/image.png">`. In the most cases this URL should be
@@ -105,7 +105,7 @@ url:            http://open.leancloud.cn
 # Note: you should avoid protocol-free (ie. //cdn.mysite.tld) address here
 # because Twitter Cards doesn't work well with protocol-free assets when AMSF
 # grabs the first image of your post as post featured image.
-file:           http://open.leancloud.cn
+file:           https://open.leancloud.cn
 
 # Download files URL used in posts, ie. href="{{ site.download }}/package.zip",
 # this should also be a CDN link just like `site.file`. There're no notable
