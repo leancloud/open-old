@@ -1,3 +1,20 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/leancloud/open/compare/v0.0.5...v0.0.6) (2017-01-05)
+
+
+### Bug Fixes
+
+* **post:** wrong layout ([63de58d](https://github.com/leancloud/open/commit/63de58d))
+* **theme:** header to large for some users to realize this page scrollable... ([85ea4d6](https://github.com/leancloud/open/commit/85ea4d6))
+
+### Features
+
+* **style:** responsive background size ([6c3a080](https://github.com/leancloud/open/commit/6c3a080))
+* add Open Graph ([825e1ed](https://github.com/leancloud/open/commit/825e1ed))
+* **style:** use system font ([20e958f](https://github.com/leancloud/open/commit/20e958f))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/leancloud/open/compare/v0.0.4...v0.0.5) (2016-05-12)
 
