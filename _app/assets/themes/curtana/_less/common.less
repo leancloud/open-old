@@ -90,6 +90,14 @@ body:hover .latest {
 
   a {
     font-weight: bold;
+
+    // TODO: Fixes wrong underline color for inline `code` within `a` links.
+    // However no browser supports this feature at the time of writing.
+    // More info: http://caniuse.com/#feat=css-has
+    // Date: Dec 10, 2016, 5:59 PM
+    &:has(>code) {
+      text-decoration-color: @code-color;
+    }
   }
 
   p {
@@ -112,7 +120,7 @@ body:hover .latest {
     .margin-offset(-@space-lg, -@space-lg);
 
     @media (max-width: @breakpoint-md) {
-      min-height: calc(64vh - @nav-padding * 2 - 3ex);
+      min-height: calc(50vh - @nav-padding * 2 - 3ex);
       padding-top: 16vmin;
       padding-bottom: 16vmin;
       .padding-offset(@space-md, @space-md);
@@ -200,11 +208,13 @@ body:hover .latest {
         position: absolute;
         display: inline-block;
         width: 4em;
+        margin-top: 1px;
         margin-left: -4em;
         font-size: 80%;
         line-height: (@line-height * 1.2 / .8);
         text-align: right;
         opacity: .6;
+        pointer-events: none;
       }
 
       > ul,
@@ -224,6 +234,30 @@ body:hover .latest {
     counter-increment: list;
     content: counter(list) ".";
     padding-right: .3em;
+  }
+
+  dl {
+    line-height: (@line-height * 1.2);
+
+    @media (max-width: @breakpoint-sm) {
+      margin-left: 1em;
+    }
+
+    dt {
+
+      &:before {
+        position: absolute;
+        width: 1em;
+        margin-left: -1em;
+        content: "-";
+        opacity: .6;
+        pointer-events: none;
+      }
+    }
+
+    dd {
+      margin-bottom: 1.8rem;
+    }
   }
 
   img,
@@ -319,6 +353,7 @@ body:hover .latest {
   // Only apply word breaking rule for codes in paragraphs
   p code,
   li code {
+    font-size: 92%;
     word-break: break-all;
   }
 

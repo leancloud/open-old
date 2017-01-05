@@ -31,6 +31,7 @@ body {
   color: @text-color;
   background: @background-color;
   transition: all .2s ease;
+  font-feature-settings: @font-features;
 
   @media (max-width: @breakpoint-md) {
     .padding-offset(@space-md, @space-md);
@@ -83,6 +84,14 @@ a, button {
     opacity: .4;
     cursor: not-allowed;
   }
+}
+
+button {
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
 }
 
 img, hr {

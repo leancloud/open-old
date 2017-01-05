@@ -12,6 +12,10 @@ module.exports = (grunt) ->
   # Track tasks load time
   require("time-grunt") grunt
 
+  # Get deploy target, run `$ grunt rsync --env=server01` to deploy to your
+  # `server01`, server info stored in `_deploy.yml`.
+  deploy_env = grunt.option("env") or "default"
+
   # Project configurations
   grunt.initConfig
     config:
@@ -33,9 +37,10 @@ module.exports = (grunt) ->
       theme:
         branch: "master"
         assets: "<%= amsf.user.assets %>/themes/<%= amsf.theme.current %>"
-        current: "<%= config.amsf.theme %>"
+        current: "<%= config.amsf.amsf_theme %>"
+        current_url: "<%= config.amsf.amsf_theme_url %>"
         new_name: grunt.option("theme") or "<%= amsf.theme.current %>"
-        new_author: grunt.option("user") or "amsf"
+        new_url: grunt.option("url") or "<%= amsf.theme.current_url %>"
 
     coffeelint:
       options:
@@ -175,7 +180,7 @@ module.exports = (grunt) ->
           useShortDoctype: false
           removeEmptyAttributes: true
           removeOptionalTags: true
-          removeEmptyElements: true
+          removeEmptyElements: false
           lint: false
           keepClosingSlash: false
           caseSensitive: true
@@ -246,6 +251,10 @@ module.exports = (grunt) ->
         ]
 
     uncss_inline:
+      options:
+        uncssrc: ".uncssrc"
+        htmlroot: "<%= config.dist %>"
+
       dist:
         files: [
           expand: true
@@ -315,15 +324,15 @@ module.exports = (grunt) ->
 
       # Direct rsync compiled static files to remote server
       amsf__deploy__rsync:
-        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.port %>' --delete --progress <%= config.deploy.rsync.params %> <%= config.dist %>/ <%= config.deploy.rsync.user %>@<%= config.deploy.rsync.host %>:<%= config.deploy.rsync.dest %> > deploy-rsync.log"
+        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.#{deploy_env}.port %>' --delete --progress <%= config.deploy.rsync.#{deploy_env}.params %> <%= config.dist %>/ <%= config.deploy.rsync.#{deploy_env}.user %>@<%= config.deploy.rsync.#{deploy_env}.host %>:<%= config.deploy.rsync.#{deploy_env}.dest %> > deploy-rsync-#{deploy_env}.log"
 
       # Copy compiled static files to local directory for further post-process
       amsf__deploy__sparanoid__copy_to_local:
-        command: "rsync -avz --delete --progress <%= config.deploy.rsync.params %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > deploy-s3_website.log"
+        command: "rsync -avz --delete --progress <%= config.deploy.rsync.#{deploy_env}.params %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.#{deploy_env}.dest %>/site/<%= config.base %> > deploy-s3_website-#{deploy_env}.log"
 
       # Auto commit untracked files sync'ed from sync_local
       amsf__deploy__sparanoid__auto_commit:
-        command: "bash <%= config.deploy.s3_website.dest %>/auto-commit '<%= config.pkg.name %>'"
+        command: "bash <%= config.deploy.s3_website.#{deploy_env}.dest %>/auto-commit '<%= config.pkg.name %>'"
 
       amsf__core__update_deps:
         command: [
@@ -458,7 +467,7 @@ module.exports = (grunt) ->
 
       amsf__theme__add_remote:
         options:
-          repository: "https://github.com/<%= amsf.theme.new_author %>/amsf-<%= amsf.theme.new_name %>.git"
+          repository: "<%= amsf.theme.new_url %>.git"
           branch: "<%= amsf.theme.branch %>"
           directory: "<%= amsf.base %>/themes/<%= amsf.theme.new_name %>/"
 
@@ -481,6 +490,9 @@ module.exports = (grunt) ->
         src: "<%= amsf.base %>/themes/<%= amsf.theme.current %>"
 
     cleanempty:
+      options:
+        files: false
+
       dist:
         src: ["<%= config.dist %>/**/*"]
 
@@ -490,8 +502,12 @@ module.exports = (grunt) ->
         dest: "_amsf.yml"
         replacements: [
           {
-            from: /(theme: +)(.+)/g
+            from: /(amsf_theme: +)(.+)/g
             to: "$1<%= amsf.theme.new_name %>"
+          }
+          {
+            from: /(amsf_theme_url: +)(.+)/g
+            to: "$1<%= amsf.theme.new_url %>"
           }
         ]
 
@@ -559,6 +575,7 @@ module.exports = (grunt) ->
         updateConfigs: ["config.pkg"]
         commitMessage: "chore: release v%VERSION%"
         commitFiles: ["-a"]
+        gitCommitOptions: "-S"
         tagMessage: "chore: create tag %VERSION%"
         push: false
 
@@ -681,7 +698,7 @@ module.exports = (grunt) ->
       "replace:amsf__site__update_version"
       "bump-commit"
     ]
-    if grunt.option("publish")
+    if grunt.option("push")
       grunt.task.run [
         "shell:amsf__release"
       ]
