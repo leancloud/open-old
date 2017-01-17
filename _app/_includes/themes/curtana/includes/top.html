@@ -11,17 +11,17 @@
 <!-- Define a description for better SEO result -->
 <meta name="description" content="{{ amsf_site_desc | strip }}">
 
+<!-- Cheome Web App theme color -->
+<meta name="theme-color" content="{{ amsf_theme_color | strip }}">
+
 <!-- Feed URL -->
 <link rel="alternate" href="{{ amsf_feed_url }}" type="application/atom+xml">
 
 <!-- Site icons -->
-{% if site.base != "" %}
-  <link rel="icon" href="{{ amsf_favicon }}">
-  <link rel="apple-touch-icon" href="{{ amsf_apple_touch_icon }}">
-{% endif %}
+{{ amsf_favicons }}
 
-<!-- Pinned icon for Safari -->
-<link rel="mask-icon" href="{{ amsf_favicon_svg }}" color="{{ site.primary_color }}">
+<!-- Chrome Web App manifest -->
+<link rel="manifest" href="{{ '/manifest.json' | prepend: site.base }}">
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{ '/css/app.css?assets-inline' | prepend: amsf_theme_assets }}">

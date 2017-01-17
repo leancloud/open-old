@@ -350,11 +350,10 @@ body:hover .latest {
     color: @code-color;
   }
 
-  // Only apply word breaking rule for codes in paragraphs
   p code,
   li code {
     font-size: 92%;
-    word-break: break-all;
+    word-wrap: break-word;
   }
 
   pre {
