@@ -6,7 +6,7 @@
       <li><a href="{{ site.base }}/">{{ site.name }}</a></li>
 
       {% if site.credits %}
-        <li><a href="http://sparanoid.com/lab/amsf/" title="Almace Scaffolding">AMSF</a></li>
+        <li><a href="https://sparanoid.com/lab/amsf/" title="Almace Scaffolding">AMSF</a></li>
         <li><a href="{{ site.data.curtana.meta.url }}" title="{{ site.data.curtana.meta.name }}">{{ site.data.curtana.meta.name }}</a></li>
       {% endif %}
 
@@ -19,7 +19,13 @@
   </footer>
 {% endif %}
 
-<!-- The following code is an example use of including external JavaScript libraries -->
+<!-- Theme scripts -->
+<script src="{{ '/js/app.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
+
+<!-- User scripts -->
+<script src="{{ '/js/user.js?assets-inline' | prepend: amsf_user_assets }}"></script>
+
+<!-- Lightense Images -->
 {% if page.plugin == 'lightense' %}
   <script src="{{ '/js/lightense.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
   <script>
@@ -30,13 +36,10 @@
   </script>
 {% endif %}
 
-<!-- Theme scripts -->
-<script src="{{ '/js/app.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
+<!-- Service Worker  -->
+{{ amsf_service_worker }}
 
-<!-- User custom scripts -->
-<script src="{{ '/js/user.js?assets-inline' | prepend: amsf_user_assets }}"></script>
-
-<!-- Google Analytics tracking code -->
+<!-- Google Analytics -->
 {{ amsf_google_analytics }}
 
 <!-- Foot hooks -->

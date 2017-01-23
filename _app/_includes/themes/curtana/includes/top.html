@@ -11,17 +11,17 @@
 <!-- Define a description for better SEO result -->
 <meta name="description" content="{{ amsf_site_desc | strip }}">
 
+<!-- Cheome Web App theme color -->
+<meta name="theme-color" content="{{ amsf_theme_color | strip }}">
+
 <!-- Feed URL -->
 <link rel="alternate" href="{{ amsf_feed_url }}" type="application/atom+xml">
 
 <!-- Site icons -->
-{% if site.base %}
-  <link rel="icon" href="{{ '/favicon.ico' | prepend: site.base }}">
-  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | prepend: site.base }}">
-{% endif %}
+{{ amsf_favicons }}
 
-<!-- Pinned icon for Safari -->
-<link rel="mask-icon" href="{{ '/favicon.svg' | prepend: site.base }}" color="{{ site.primary_color }}">
+<!-- Chrome Web App manifest -->
+<link rel="manifest" href="{{ '/manifest.json' | prepend: site.base }}">
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{ '/css/app.css?assets-inline' | prepend: amsf_theme_assets }}">
@@ -30,7 +30,7 @@
 <link rel="canonical" href="{{ amsf_page_url }}">
 
 <!-- DNS prefetching for static files -->
-{% if page.permalink == '/' %}<link rel="dns-prefetch" href="{{ site.file }}">{% endif %}
+{% if page.permalink == "/" %}<link rel="dns-prefetch" href="{{ site.file }}">{% endif %}
 
 <!-- browser-sync, don't remove this -->
 <!-- BS_INSERT -->

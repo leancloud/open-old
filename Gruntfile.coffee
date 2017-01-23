@@ -1,4 +1,5 @@
 "use strict"
+
 module.exports = (grunt) ->
 
   # Load all grunt tasks
@@ -12,6 +13,9 @@ module.exports = (grunt) ->
   # Track tasks load time
   require("time-grunt") grunt
 
+  # Get deploy target, see `_deploy.yml` for more info
+  deploy_env = grunt.option("env") or "default"
+
   # Project configurations
   grunt.initConfig
     config:
@@ -22,6 +26,7 @@ module.exports = (grunt) ->
       app: "<%= config.cfg.source %>"
       dist: "<%= config.cfg.destination %>"
       base: "<%= config.cfg.base %>"
+      assets: "<%= config.cfg.assets %>"
       banner: "<!-- <%= config.pkg.name %> v<%= config.pkg.version %> | © <%= config.pkg.author %> | <%= config.pkg.license %> -->\n"
 
     amsf:
@@ -29,13 +34,14 @@ module.exports = (grunt) ->
       branch: grunt.option("branch") or "release"
       core: "<%= amsf.base %>/core"
       user:
-        assets: "<%= config.app %>/assets"
+        assets: "<%= config.app %><%= config.assets %>"
       theme:
         branch: "master"
         assets: "<%= amsf.user.assets %>/themes/<%= amsf.theme.current %>"
-        current: "<%= config.amsf.theme %>"
+        current: "<%= config.amsf.amsf_theme %>"
+        current_url: "<%= config.amsf.amsf_theme_url %>"
         new_name: grunt.option("theme") or "<%= amsf.theme.current %>"
-        new_author: grunt.option("user") or "amsf"
+        new_url: grunt.option("url") or "<%= amsf.theme.current_url %>"
 
     coffeelint:
       options:
@@ -49,14 +55,6 @@ module.exports = (grunt) ->
 
       gruntfile:
         src: ["Gruntfile.coffee"]
-
-    lesslint:
-      options:
-        csslint:
-          csslintrc: "<%= amsf.theme.assets %>/_less/.csslintrc"
-
-      test:
-        src: ["<%= amsf.theme.assets %>/_less/**/app*.less"]
 
     watch:
       options:
@@ -89,12 +87,12 @@ module.exports = (grunt) ->
         ]
 
     uglify:
-      dist:
-        options:
-          report: "gzip"
-          compress:
-            drop_console: true
+      options:
+        report: "gzip"
+        compress:
+          drop_console: true
 
+      dist:
         files: [
           {
             expand: true
@@ -109,6 +107,9 @@ module.exports = (grunt) ->
             dest: "<%= amsf.theme.assets %>/js/"
           }
         ]
+
+      sw:
+        files: "<%= config.dist %><%= config.base %>/<%= service_worker.dist.options.workerFile %>": [ "<%= config.dist %><%= config.base %>/<%= service_worker.dist.options.workerFile %>" ]
 
     less:
       options:
@@ -175,7 +176,7 @@ module.exports = (grunt) ->
           useShortDoctype: false
           removeEmptyAttributes: true
           removeOptionalTags: true
-          removeEmptyElements: true
+          removeEmptyElements: false
           lint: false
           keepClosingSlash: false
           caseSensitive: true
@@ -234,7 +235,7 @@ module.exports = (grunt) ->
         inlineImg: false
         inlineSvg: true
         inlineSvgBase64: false
-        assetsUrlPrefix: "<%= config.base %>/assets/"
+        assetsUrlPrefix: "<%= config.base %><%= config.assets %>"
         deleteOriginals: true
 
       dist:
@@ -246,6 +247,10 @@ module.exports = (grunt) ->
         ]
 
     uncss_inline:
+      options:
+        uncssrc: ".uncssrc"
+        htmlroot: "<%= config.dist %>"
+
       dist:
         files: [
           expand: true
@@ -272,7 +277,7 @@ module.exports = (grunt) ->
     cacheBust:
       options:
         algorithm: "md5"
-        assets: ["<%= amsf.user.assets %>/**/*"]
+        assets: ["**/*.css", "**/*.js"]
         baseDir: "<%= config.dist %>"
         deleteOriginals: true
         encoding: "utf8"
@@ -284,6 +289,15 @@ module.exports = (grunt) ->
           cwd: "<%= config.dist %>"
           src: "**/*.html"
         ]
+
+    service_worker:
+      dist:
+        options:
+          cacheId: "<%= config.pkg.name %>"
+          baseDir: "<%= config.dist %>"
+          workerFile: "service-worker.js"
+          workerDir: "<%= config.dist %><%= config.base %>"
+          staticFileGlobs: "<%= config.cfg.service_worker.files %>"
 
     usebanner:
       options:
@@ -313,17 +327,21 @@ module.exports = (grunt) ->
       options:
         stdout: true
 
-      # Direct rsync compiled static files to remote server
+      # Sync compiled static files via `rsync`
       amsf__deploy__rsync:
-        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.port %>' --delete --progress <%= config.deploy.rsync.params %> <%= config.dist %>/ <%= config.deploy.rsync.user %>@<%= config.deploy.rsync.host %>:<%= config.deploy.rsync.dest %> > deploy-rsync.log"
+        command: "rsync -avz -e 'ssh -p <%= config.deploy.rsync.#{deploy_env}.port %>' --delete --progress <%= config.deploy.rsync.#{deploy_env}.params %> <%= config.dist %>/ <%= config.deploy.rsync.#{deploy_env}.user %>@<%= config.deploy.rsync.#{deploy_env}.host %>:<%= config.deploy.rsync.#{deploy_env}.dest %> > deploy-rsync-#{deploy_env}.log"
+
+      # Sync compiled static files via `s3_website`
+      amsf__deploy__s3:
+        command: "s3_website push --site=<%= config.dist %>/ > deploy-s3-#{deploy_env}.log"
 
       # Copy compiled static files to local directory for further post-process
       amsf__deploy__sparanoid__copy_to_local:
-        command: "rsync -avz --delete --progress <%= config.deploy.rsync.params %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.s3_website.dest %>/site/<%= config.base %> > deploy-s3_website.log"
+        command: "rsync -avz --delete --progress <%= config.deploy.rsync.#{deploy_env}.params %> <%= jekyll.dist.options.dest %>/ <%= config.deploy.sparanoid.#{deploy_env}.dest %>/site/<%= config.base %> > deploy-sparanoid-#{deploy_env}.log"
 
       # Auto commit untracked files sync'ed from sync_local
       amsf__deploy__sparanoid__auto_commit:
-        command: "bash <%= config.deploy.s3_website.dest %>/auto-commit '<%= config.pkg.name %>'"
+        command: "bash <%= config.deploy.sparanoid.#{deploy_env}.dest %>/auto-commit '<%= config.pkg.name %>'"
 
       amsf__core__update_deps:
         command: [
@@ -458,7 +476,7 @@ module.exports = (grunt) ->
 
       amsf__theme__add_remote:
         options:
-          repository: "https://github.com/<%= amsf.theme.new_author %>/amsf-<%= amsf.theme.new_name %>.git"
+          repository: "<%= amsf.theme.new_url %>.git"
           branch: "<%= amsf.theme.branch %>"
           directory: "<%= amsf.base %>/themes/<%= amsf.theme.new_name %>/"
 
@@ -481,6 +499,9 @@ module.exports = (grunt) ->
         src: "<%= amsf.base %>/themes/<%= amsf.theme.current %>"
 
     cleanempty:
+      options:
+        files: false
+
       dist:
         src: ["<%= config.dist %>/**/*"]
 
@@ -490,8 +511,12 @@ module.exports = (grunt) ->
         dest: "_amsf.yml"
         replacements: [
           {
-            from: /(theme: +)(.+)/g
+            from: /(amsf_theme: +)(.+)/g
             to: "$1<%= amsf.theme.new_name %>"
+          }
+          {
+            from: /(amsf_theme_url: +)(.+)/g
+            to: "$1<%= amsf.theme.new_url %>"
           }
         ]
 
@@ -559,6 +584,7 @@ module.exports = (grunt) ->
         updateConfigs: ["config.pkg"]
         commitMessage: "chore: release v%VERSION%"
         commitFiles: ["-a"]
+        gitCommitOptions: "-S"
         tagMessage: "chore: create tag %VERSION%"
         push: false
 
@@ -658,8 +684,7 @@ module.exports = (grunt) ->
   grunt.registerTask "build", "Build site with jekyll", [
     "clean:main"
     "coffeelint"
-    "uglify"
-    "lesslint"
+    "uglify:dist"
     "less:dist"
     "postcss:dist"
     "csscomb"
@@ -670,6 +695,8 @@ module.exports = (grunt) ->
     "uncss_inline"
     "cacheBust"
     "concurrent:dist"
+    "service_worker"
+    "uglify:sw"
     "cleanempty"
   ]
 
@@ -681,13 +708,17 @@ module.exports = (grunt) ->
       "replace:amsf__site__update_version"
       "bump-commit"
     ]
-    if grunt.option("publish")
+    if grunt.option("push")
       grunt.task.run [
         "shell:amsf__release"
       ]
 
   grunt.registerTask "deploy-rsync", "Deploy to remote server via rsync",  [
     "shell:amsf__deploy__rsync"
+  ]
+
+  grunt.registerTask "deploy-s3", "Deploy to AWS S3",  [
+    "shell:amsf__deploy__s3"
   ]
 
   grunt.registerTask "deploy-sparanoid", "Deploy to remote server (for sparanoid.com)",  ->
