@@ -1,9 +1,8 @@
 <!-- Footer section -->
-{% if page.permalink == '/' and site.data.curtana.clean_homepage %}
-{% else %}
+{% unless page.permalink == '/' and site.data.curtana.clean_homepage %}
   <footer class="footer">
     <ul>
-      <li><a href="{{ site.base }}/">{{ site.name }}</a></li>
+      <li><a href="{{ '/' | relative_url }}">{{ site.name }}</a></li>
 
       {% if site.credits %}
         <li><a href="https://sparanoid.com/lab/amsf/" title="Almace Scaffolding">AMSF</a></li>
@@ -11,13 +10,13 @@
       {% endif %}
 
       {% if site.data.curtana.subscription %}
-        <li><a href="{{ '/email-signup' | prepend: site.base }}/">Email</a></li>
+        <li><a href="{{ '/email-signup' | relative_url }}/">Email</a></li>
       {% endif %}
 
-      <li><a href="{{ amsf_feed_url }}" title="Feed - Atom (The Atom Syndication Format)">Atom</a></li>
+      <li><a href="{{ amsf_feed_url | strip }}" title="Feed - Atom (The Atom Syndication Format)">Atom</a></li>
     </ul>
   </footer>
-{% endif %}
+{% endunless %}
 
 <!-- Theme scripts -->
 <script src="{{ '/js/app.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
@@ -27,11 +26,10 @@
 
 <!-- Lightense Images -->
 {% if page.plugin == 'lightense' %}
-  <script src="{{ '/js/lightense.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
+  <script src="{{ '/js/lightense.min.js?assets-inline' | prepend: amsf_theme_assets }}"></script>
   <script>
     window.addEventListener('load', function () {
-      var el = document.querySelectorAll('p > img:not(.no-lightense),.lightense');
-      Lightense(el);
+      Lightense('p > img:not(.no-lightense),.lightense');
     }, false);
   </script>
 {% endif %}

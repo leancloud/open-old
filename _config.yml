@@ -29,7 +29,7 @@ port:           4321
 future:         false
 
 #
-# Additional Markdown settings
+# Markdown settings
 #
 
 kramdown:
@@ -42,18 +42,10 @@ kramdown:
   enable_coderay:            false
   hard_wrap:                 false
   syntax_highlighter:        rouge
+  syntax_highlighter_opts:
+    css_class:               "highlight"
   transliterated_header_ids: true
   footnote_backlink:         "&#8617;&#xfe0e;"
-
-redcarpet:
-  extensions:
-    - footnotes
-    - no_intra_emphasis
-    - smart
-    - space_after_headers
-    - strikethrough
-    - superscript
-    - tables
 
 #
 # Jekyll plugins
@@ -108,11 +100,11 @@ description:    这里是 LeanCloud 开放的一些关于公司而不是产品�
 #
 # This is useful when I need to build site in a subdirectory (like
 # GitHub Pages for Projects), it provides a specific URL prefix, for example, if
-# the production site URL is https://sparanoid.com/my-project/, set `base` to
+# the production site URL is https://sparanoid.com/my-project/, set `baseurl` to
 # `/my-project`, without trailing slash.
 #
 # Default:      ""
-base:           ""
+baseurl:        ""
 
 # CSS path used in templates
 #
@@ -167,9 +159,9 @@ colors:
 # Service Worker Precache
 service_worker:
   enabled:      true
+  max_size:     120000
   files:
-    - "**/*.{css,html,jpg,gif,png,svg}"
-    - "**/img/**.*"
+    - "**/*.{css,html,jpg,gif,png,svg,woff,woff2}"
     - "**/js/**.js"
 
 # Google Analytics tracking code

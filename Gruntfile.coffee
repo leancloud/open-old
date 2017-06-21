@@ -20,12 +20,14 @@ module.exports = (grunt) ->
   grunt.initConfig
     config:
       cfg: grunt.file.readYAML("_config.yml")
+      cfg_dev: grunt.file.readYAML("_config.dev.yml")
       pkg: grunt.file.readJSON("package.json")
       amsf: grunt.file.readYAML("_amsf.yml")
       deploy: grunt.file.readYAML("_deploy.yml")
       app: "<%= config.cfg.source %>"
       dist: "<%= config.cfg.destination %>"
-      base: "<%= config.cfg.base %>"
+      base: "<%= config.cfg.baseurl %>"
+      base_dev: "<%= config.cfg_dev.baseurl %>"
       assets: "<%= config.cfg.assets %>"
       banner: "<!-- <%= config.pkg.name %> v<%= config.pkg.version %> | © <%= config.pkg.author %> | <%= config.pkg.license %> -->\n"
 
@@ -133,21 +135,19 @@ module.exports = (grunt) ->
         files: "<%= less.serve.files %>"
 
     postcss:
+      options:
+        processors: [
+          require("autoprefixer")(browsers: "last 1 versions")
+        ]
+
       serve:
         src: "<%= amsf.theme.assets %>/css/*.css"
         options:
           map:
             inline: true
-          processors: [
-            require("autoprefixer")(browsers: "last 1 versions")
-          ]
 
       dist:
         src: "<%= postcss.serve.src %>"
-        options:
-          processors: [
-            require("autoprefixer")(browsers: "last 2 versions")
-          ]
 
     csscomb:
       options:
@@ -226,6 +226,15 @@ module.exports = (grunt) ->
       #   src: "**/*.html"
       #   dest: "<%= config.dist %>"
 
+    html_trim:
+      dist:
+        files: [
+          expand: true
+          cwd: "<%= config.dist %>"
+          src: ["**/*.html"]
+          dest: "<%= config.dist %>"
+        ]
+
     assets_inline:
       options:
         jsDir: "<%= config.dist %>"
@@ -235,6 +244,7 @@ module.exports = (grunt) ->
         inlineImg: false
         inlineSvg: true
         inlineSvgBase64: false
+        inlineLinkTags: true
         assetsUrlPrefix: "<%= config.base %><%= config.assets %>"
         deleteOriginals: true
 
@@ -297,6 +307,7 @@ module.exports = (grunt) ->
           baseDir: "<%= config.dist %>"
           workerFile: "service-worker.js"
           workerDir: "<%= config.dist %><%= config.base %>"
+          maximumFileSizeToCacheInBytes: "<%= config.cfg.service_worker.max_size %>"
           staticFileGlobs: "<%= config.cfg.service_worker.files %>"
 
     usebanner:
@@ -315,6 +326,7 @@ module.exports = (grunt) ->
       serve:
         options:
           config: "_config.yml,_amsf.yml,<%= config.app %>/_data/<%= amsf.theme.current %>.yml,_config.dev.yml"
+          dest: "<%= config.dist %><%= config.base_dev %>"
           drafts: true
           future: true
 
@@ -370,6 +382,9 @@ module.exports = (grunt) ->
 
       amsf__theme__to_dev_repo:
         command: "rsync -avz --delete --progress --exclude=.git --exclude=node_modules <%= amsf.base %>/themes/<%= amsf.theme.current %>/ /Users/sparanoid/Git/amsf-<%= amsf.theme.current %> > rsync-theme-dev.log"
+
+      amsf__staging:
+        command: "git checkout staging && git pull && git merge master --no-edit && git push && git checkout master && git push"
 
       amsf__release:
         command: "git checkout release && git pull && git merge master --no-edit && git push && git checkout master && git push"
@@ -457,6 +472,13 @@ module.exports = (grunt) ->
               "_amsf.html"
             ]
             dest: "<%= config.app %>/_includes/"
+          }
+          {
+            expand: true
+            dot: true
+            cwd: "<%= amsf.core %>/_app/_includes/amsf/"
+            src: ["**"]
+            dest: "<%= config.app %>/_includes/amsf/"
           }
           {
             expand: true
@@ -695,6 +717,7 @@ module.exports = (grunt) ->
     "uncss_inline"
     "cacheBust"
     "concurrent:dist"
+    "html_trim"
     "service_worker"
     "uglify:sw"
     "cleanempty"
@@ -708,10 +731,11 @@ module.exports = (grunt) ->
       "replace:amsf__site__update_version"
       "bump-commit"
     ]
-    if grunt.option("push")
-      grunt.task.run [
-        "shell:amsf__release"
-      ]
+
+  grunt.registerTask "publish", "Publish new release", (branch) ->
+    grunt.task.run [
+      "shell:amsf__#{branch or 'staging'}"
+    ]
 
   grunt.registerTask "deploy-rsync", "Deploy to remote server via rsync",  [
     "shell:amsf__deploy__rsync"

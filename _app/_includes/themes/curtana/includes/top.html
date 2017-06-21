@@ -15,13 +15,13 @@
 <meta name="theme-color" content="{{ amsf_theme_color | strip }}">
 
 <!-- Feed URL -->
-<link rel="alternate" href="{{ amsf_feed_url }}" type="application/atom+xml">
+<link rel="alternate" href="{{ amsf_feed_url | strip }}" type="application/atom+xml">
 
 <!-- Site icons -->
 {{ amsf_favicons }}
 
 <!-- Chrome Web App manifest -->
-<link rel="manifest" href="{{ '/manifest.json' | prepend: site.base }}">
+<link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="{{ '/css/app.css?assets-inline' | prepend: amsf_theme_assets }}">
