@@ -1,3 +1,14 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/leancloud/open/compare/v0.0.6...v0.0.7) (2018-01-24)
+
+
+### Bug Fixes
+
+* **amsf:** missing header ([3a1c962](https://github.com/leancloud/open/commit/3a1c962))
+* **css:** wrong font weight on Firefox, damn ([70ae230](https://github.com/leancloud/open/commit/70ae230))
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/leancloud/open/compare/v0.0.5...v0.0.6) (2017-01-05)
 
