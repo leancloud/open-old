@@ -40,8 +40,8 @@ lang: zh
 
 * 如果在正文中部分引用第三方内容，请使用恰当的引用格式并给出出处。如：
 
-  > One man's constant is another man's variable.
-  > --- Alan Perlis
+  > One man's constant is another man's variable.  
+  > — Alan Perlis
 
 * 如果是全篇转载，请在全文开头显著位置注明出处并链接至原文，如：
 
@@ -49,7 +49,7 @@ lang: zh
 
 * 如果格式不允许超链接，请以文本方式直接给出原文链接。如果原文链接太长影响美观，可以使用短链接服务。如：
 
-  > 本文转载自 WikiQuote：http://bit.ly/UlHIdN
+  > 本文转载自 WikiQuote：`http://bit.ly/UlHIdN`
 
 ## 图片的使用
 

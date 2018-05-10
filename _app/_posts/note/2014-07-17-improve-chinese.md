@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 余光中：怎样改进英式中文？<span class="em-dash-fix">——</span>论中文的常态与变态
+title: 余光中：怎样改进英式中文？—— 论中文的常态与变态
 category: note
 hidden: true
 lang: zh
@@ -45,11 +45,11 @@ lang: zh
 
 巴仁等学者感概现代英文喜欢化简为繁、化动为静、化具体为抽象、化直接为迂回，到了「名词成灾」（noun-plague）的地步。学问分工日细，各种学科的行话术语，尤其是科学与社会科学的「夹杠」，经过本行使用，外行借用，加上「新闻体」（journalese）的传播，一方面固然使现代英文显得多彩多姿，另一方面却也造成混乱，使日常用语斑驳不堪。英国诗人格雷夫斯（Robert Graves, 1895-1986）在短诗『耕田』（Tilth）里批评这现象说：
 
-> Gone are the sad monosyllabic days<br>
-> When "agricultural labour"still was tilth;<br>
-> And "100% approbation", praise;<br>
-> And "pornographic modernism", filth-<br>
-> And still I stand by tilth and filth and praise.<br>
+> Gone are the sad monosyllabic days  
+> When "agricultural labour"still was tilth;  
+> And "100% approbation", praise;  
+> And "pornographic modernism", filth-  
+> And still I stand by tilth and filth and praise.  
 
 「名词成灾」的流行病里，灾情最严重的该是所谓「科学至上」（scientism）。在现代的工业社会里，科学早成显贵，科技更是骄子，所以知识分子的口头与笔下，有意无意，总爱用一些「学术化」的抽象名词，好显得客观而精确。有人称之为「伪术语」（pseudo-jargon）。例如：明明是 first step，却要说成 initial phase：明明是 letter，却要说成 communication，都属此类。
 
@@ -168,8 +168,8 @@ lang: zh
 
 目前的白话文，不知何故，几乎一律前饰，似乎不懂后饰之道。例如前引的英文句，若用中文来说，一般人会不假思索说成：「我见到一个长得像你兄弟的男人。」却很少人会说：「我见到一个男人，长得像你兄弟。」如果句短，前饰也无所谓。如果句长，前饰就太生硬了。例如下面这句：「我见到一个长得像你兄弟说话也有点像他的陌生男人。」就冗长得尾大不掉了。要是改为后饰，就自然得多：「我见到一个陌生男人，长得像你兄弟，说话也有点像他。」其实文言文的句子往往是后饰的，例如司马迁写项羽与李广的这两句：
 
-> 籍长八尺余，力能扛鼎，才气过人。<br>
-> 广为人长，猿臂，其善射亦天性也。<br>
+> 籍长八尺余，力能扛鼎，才气过人。  
+> 广为人长，猿臂，其善射亦天性也。  
 
 这两句在当代白话文里，很可能变成：
 

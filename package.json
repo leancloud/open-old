@@ -6,7 +6,9 @@
   "homepage": "http://open.leancloud.cn/",
   "main": "Gruntfile.coffee",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "lint": "bundle exec mdl _app/_posts/",
+    "precommit": "bundle exec mdl _app/_posts/"
   },
   "repository": {
     "type": "git",
@@ -57,6 +59,7 @@
     "grunt-text-replace": "^0.4.0",
     "grunt-uncss-inline": "^1.0.5",
     "grunt-xmlmin": "^0.1.8",
+    "husky": "^0.14.3",
     "jit-grunt": "^0.10.0",
     "time-grunt": "^1.4.0"
   }
